@@ -1,0 +1,605 @@
+/* Start Global Rules */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  background-color: var(--color-one);
+  color: var(--color-three);
+}
+
+:root {
+  --color-one: #100f0f;
+  --color-two: #0f3d3e;
+  --color-three: #e2dcc8;
+  --color-four: #f1f1f1;
+  --main-transition: 0.3s;
+  --section-padding: 20px;
+}
+
+::selection {
+  background-color: var(--color-four);
+  color: var(--color-two);
+}
+
+ul {
+  list-style: none;
+}
+input,
+select {
+  transition: var(--main-transition);
+  border: none;
+}
+input:focus,
+select:focus,
+input:hover,
+select:hover {
+  box-shadow: 0 0 5px 0px var(--color-four);
+  outline: none;
+  transform: scale(1.03);
+}
+input {
+  caret-color: var(--color-two);
+}
+
+/* prevent arrow */
+/* For chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* for firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.container {
+  /* علشان نضمن انهم مش لزقين في الحرف خصوصا للهاتف */
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* small */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+/* medium */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+/* larg */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+@media (min-width: 1600px) {
+  .container {
+    width: 1570px;
+  }
+}
+/* End Global Rules */
+
+/* Start Admin */
+.admin {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background-color: var(--color-two);
+  padding: 7px 10px;
+  border-radius: 2px;
+  transition: var(--main-transition);
+}
+.admin:hover {
+  color: white;
+}
+/* End Admin */
+
+/* Start login page */
+.login {
+  position: absolute;
+  width: 0;
+  height: calc(100vh - 25px);
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.97);
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.login .container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login .close-login {
+  position: absolute;
+  top: 30px;
+  right: 50px;
+  color: var(--color-four);
+  font-weight: bold;
+  background-color: #de1039;
+  font-size: 22px;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 40px;
+  cursor: pointer;
+  transition: var(--main-transition);
+}
+
+.login .close-login:hover {
+  color: #de1039;
+  background-color: var(--color-two);
+}
+
+.login form {
+  text-align: center;
+}
+
+.login input {
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border: 2px solid var(--color-three);
+  background-color: #333;
+  color: white;
+  caret-color: white;
+}
+
+.login button {
+  padding: 10px;
+  background-color: var(--color-two);
+  color: var(--color-three);
+  cursor: pointer;
+  transition: var(--main-transition);
+  font-weight: bold;
+  width: 150px;
+}
+.login button:hover {
+  color: white;
+  letter-spacing: 1px;
+}
+
+.login .error-login {
+  margin-top: 10px;
+}
+
+/* End login page */
+
+/* Start Head */
+.head {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+  text-align: center;
+}
+.head h1 {
+  color: var(--color-three);
+  font-size: 40px;
+  text-transform: capitalize;
+}
+
+@media (max-width: 767px) {
+  .head h1 {
+    font-size: 32px;
+  }
+}
+
+.head p {
+  font-size: 24px;
+}
+/* End Head */
+
+/* Start Competitors Info */
+form .container {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+form .container #name {
+  text-transform: lowercase;
+}
+
+form .container div input,
+form .container div select {
+  width: 100%;
+  padding: 10px 20px;
+  outline: none;
+  background-color: var(--color-four);
+  font-size: 20px;
+  caret-color: var(--color-two);
+  transition: var(--main-transition);
+}
+
+/* End Competitors Info */
+
+/* Start Score Calculator */
+
+.competitorsData {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
+
+.competitorsData .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.competitorsData .container div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.competitorsData .container div p {
+  width: 100%;
+  margin-bottom: 10px;
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+  font-size: 22px;
+}
+.competitorsData .container div input {
+  width: 48%;
+  padding: 10px;
+  background-color: var(--color-four);
+  color: var(--color-two);
+  caret-color: var(--color-two);
+  font-size: 20px;
+  text-align: center;
+}
+
+.competitorsData .container div:nth-child(10) input {
+  width: 32%;
+}
+
+.competitorsData .container div:nth-child(11) input {
+  width: 100%;
+}
+
+/* End Score Calculator */
+
+/* Start Add Competitor Button */
+
+.addCompetitor {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
+
+.addCompetitor button,
+#deleteAll button {
+  padding: 10px;
+  background-color: var(--color-two);
+  display: block;
+  width: 70%;
+  border: none;
+  cursor: pointer;
+  margin: auto;
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--color-four);
+  border-radius: 10px;
+  transition: var(--main-transition);
+}
+.addCompetitor button:hover,
+#deleteAll button:hover {
+  letter-spacing: 2px;
+  background-color: #145354;
+}
+
+#deleteAll {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
+
+@media (max-width: 767px) {
+  .addCompetitor button,
+  #deleteAll button {
+    font-size: 20px;
+  }
+}
+
+.form-alert {
+  text-align: center;
+  color: #4caf50;
+  font-weight: bold;
+  font-size: 24px;
+  text-transform: capitalize;
+  margin-top: 20px;
+  display: none;
+}
+
+.faild-color {
+  color: #e91e45;
+}
+
+/* End Add Competitor Button */
+
+/* Start Search Block */
+
+.searchBlock {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
+
+.searchBlock .container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.searchBlock .container input {
+  padding: 20px;
+  font-size: 28px;
+  width: 100%;
+  background-color: var(--color-four);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.searchBlock .container div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.searchBlock .container div button {
+  width: 48%;
+  padding: 10px;
+  background-color: var(--color-two);
+  display: block;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--color-four);
+  border-radius: 10px;
+  transition: var(--main-transition);
+}
+
+@media (max-width: 767px) {
+  .searchBlock .container div button {
+    font-size: 16px;
+  }
+  .searchBlock .container input {
+    padding: 10px;
+    font-size: 20px;
+  }
+}
+
+.searchBlock .container div button:hover {
+  letter-spacing: 2px;
+  background-color: #145354;
+}
+/* End Search Block */
+
+/* Start pagination */
+.pagination {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
+
+.pagination .container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.pagination a {
+  text-decoration: none;
+  color: var(--color-three);
+  padding: 10px;
+  transition: var(--main-transition);
+}
+
+.pagination a.active,
+.pagination a:hover {
+  background-color: #4caf50;
+  border-radius: 5px;
+  color: white;
+}
+
+@media (max-width: 767px) {
+  .pagination .container {
+    gap: 3px;
+  }
+  .pagination a {
+    font-size: 12px;
+    padding: 4px;
+  }
+}
+
+/* End pagination */
+
+/* Start Overall Table */
+
+.competitors-table {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
+
+.competitors-table h2 {
+  font-size: 42px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.competitors-table div button:not(.delete-btn) {
+  width: 160px;
+  padding: 10px;
+  background-color: var(--color-two);
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color-four);
+  border-radius: 5px;
+  transition: var(--main-transition);
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.competitors-table div button:hover:not(.delete-btn) {
+  letter-spacing: 1px;
+  background-color: #145354;
+}
+
+@media (max-width: 767px) {
+  .competitors-table h2 {
+    font-size: 26px;
+  }
+  .competitors-table div button {
+    width: fit-content;
+    font-size: 15px;
+    padding: 5px;
+    margin-right: 3px;
+  }
+}
+
+.competitors-table .tables {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.competitors-table .tables table {
+  width: 100%;
+}
+
+.competitors-table .tables table th {
+  padding: 10px 5px;
+  background-color: var(--color-two);
+  color: var(--color-four);
+  font-size: 12px;
+}
+.competitors-table .tables table td {
+  padding: 10px 5px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 12px;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: var(--color-four);
+  color: var(--color-one);
+}
+tbody tr:nth-child(even) {
+  background-color: var(--color-three);
+  color: var(--color-one);
+}
+
+tbody tr {
+  transition: var(--main-transition);
+}
+
+tbody tr:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+#update,
+#delete {
+  border-radius: 5px;
+  padding: 5px;
+  width: 50px;
+  font-size: 10px;
+  margin: auto;
+}
+
+tbody tr a i {
+  color: var(--color-two);
+  font-size: 18px;
+}
+
+tbody tr:hover a i {
+  color: white;
+}
+
+tbody #nameWidth {
+  text-transform: uppercase;
+}
+
+.competitors-table div button.delete-btn {
+  width: fit-content;
+  cursor: pointer;
+  outline: none;
+  padding: 5px;
+  border: none;
+  border-radius: 50%;
+}
+
+button.delete-btn i {
+  color: #e91e45;
+  font-size: 18px;
+  transition: var(--main-transition);
+}
+
+.competitors-table div button.delete-btn:hover i {
+  color: #de1039;
+}
+
+#img-table,
+#bin-table,
+#num5-table,
+#wor-table,
+#nam-table,
+#dat-table,
+#car-table,
+#sn-table,
+#sc-table,
+#num15-table {
+  display: none;
+}
+
+/* End Overall Table */
+
+/* Start Tasks */
+.back-link {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  border-radius: 5px;
+  display: block;
+  margin: 20px auto;
+  width: 300px;
+  font-size: 28px;
+  text-transform: capitalize;
+  transition: var(--main-transition);
+  text-align: center;
+}
+
+.back-link:hover {
+  letter-spacing: 1px;
+  background-color: #145354;
+}
+
+/* End Tasks */
