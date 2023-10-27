@@ -334,7 +334,7 @@
           />
         </div>
         <div>
-          <p>5-Binary</p>
+          <p>30-Binary</p>
           <input
             type="number"
             id="binary5Score"
@@ -349,22 +349,37 @@
           />
         </div>
         <div>
-          <p>5-Numbers</p>
+          <p>5-Numbers (1)</p>
           <input
             type="number"
-            id="number5Score"
+            id="number5ScoreOne"
             placeholder="Score"
             class="score-input"
           />
           <input
             type="number"
-            id="number5Points"
+            id="number5PointsOne"
             placeholder="Points"
             readonly
           />
         </div>
         <div>
-          <p>5-Words</p>
+          <p>5-Numbers (2)</p>
+          <input
+            type="number"
+            id="number5ScoreTwo"
+            placeholder="Score"
+            class="score-input"
+          />
+          <input
+            type="number"
+            id="number5PointsTwo"
+            placeholder="Points"
+            readonly
+          />
+        </div>
+        <div>
+          <p>15-Words</p>
           <input
             type="number"
             id="words5Score"
@@ -379,7 +394,7 @@
           />
         </div>
         <div>
-          <p>15-Numbers</p>
+          <p>60-Numbers</p>
           <input
             type="number"
             id="number15Score"
@@ -394,7 +409,7 @@
           />
         </div>
         <div>
-          <p>5-N&F</p>
+          <p>15-N&F</p>
           <input
             type="number"
             id="names5Score"
@@ -424,7 +439,7 @@
           />
         </div>
         <div>
-          <p>10-Cards</p>
+          <p>60-Cards</p>
           <input
             type="number"
             id="cards10Score"
@@ -439,32 +454,87 @@
           />
         </div>
         <div>
-          <p>Spoken</p>
+          <p>Spoken (1)</p>
           <input
             type="number"
-            id="snScore"
+            id="snScoreOne"
             placeholder="Score"
             class="score-input"
           />
-          <input type="number" id="snPoints" placeholder="Points" readonly />
+          <input type="number" id="snPointsOne" placeholder="Points" readonly />
         </div>
         <div>
-          <p>Speed Cards</p>
+          <p>Spoken (2)</p>
           <input
-            onkeyup="getscPoints()"
             type="number"
-            id="scScore"
+            id="snScoreTwo"
+            placeholder="Score"
+            class="score-input"
+          />
+          <input type="number" id="snPointsTwo" placeholder="Points" readonly />
+        </div>
+        <div>
+          <p>Spoken (3)</p>
+          <input
+            type="number"
+            id="snScoreThree"
             placeholder="Score"
             class="score-input"
           />
           <input
-            onkeyup="getscPoints()"
             type="number"
-            id="scTime"
-            placeholder="Time"
-            class="score-input"
+            id="snPointsThree"
+            placeholder="Points"
+            readonly
           />
-          <input type="number" id="scPoints" placeholder="Points" readonly />
+        </div>
+        <div>
+          <p>Speed Cards (1)</p>
+          <input
+            onkeyup="getscPointsOne()"
+            type="number"
+            id="scScoreOne"
+            placeholder="Score"
+            class="score-input sc-input"
+          />
+          <input
+            onkeyup="getscPointsOne()"
+            type="number"
+            id="scTimeOne"
+            placeholder="Time"
+            class="score-input sc-input"
+          />
+          <input
+            type="number"
+            id="scPointsOne"
+            placeholder="Points"
+            readonly
+            class="sc-input"
+          />
+        </div>
+        <div>
+          <p>Speed Cards (2)</p>
+          <input
+            onkeyup="getscPointsTwo()"
+            type="number"
+            id="scScoreTwo"
+            placeholder="Score"
+            class="score-input sc-input"
+          />
+          <input
+            onkeyup="getscPointsTwo()"
+            type="number"
+            id="scTimeTwo"
+            placeholder="Time"
+            class="score-input sc-input"
+          />
+          <input
+            type="number"
+            id="scPointsTwo"
+            placeholder="Points"
+            readonly
+            class="sc-input"
+          />
         </div>
         <div>
           <p>Total Points</p>

@@ -7,8 +7,10 @@ let images5Score = document.getElementById("images5Score");
 let images5Points = document.getElementById("images5Points");
 let binary5Score = document.getElementById("binary5Score");
 let binary5Points = document.getElementById("binary5Points");
-let number5Score = document.getElementById("number5Score");
-let number5Points = document.getElementById("number5Points");
+let number5ScoreOne = document.getElementById("number5ScoreOne");
+let number5PointsOne = document.getElementById("number5PointsOne");
+let number5ScoreTwo = document.getElementById("number5ScoreTwo");
+let number5PointsTwo = document.getElementById("number5PointsTwo");
 let number15Score = document.getElementById("number15Score");
 let number15Points = document.getElementById("number15Points");
 let names5Score = document.getElementById("names5Score");
@@ -17,11 +19,18 @@ let dates5Score = document.getElementById("dates5Score");
 let dates5Points = document.getElementById("dates5Points");
 let cards10Score = document.getElementById("cards10Score");
 let cards10Points = document.getElementById("cards10Points");
-let snScore = document.getElementById("snScore");
-let snPoints = document.getElementById("snPoints");
-let scScore = document.getElementById("scScore");
-let scPoints = document.getElementById("scPoints");
-let scTime = document.getElementById("scTime");
+let snScoreOne = document.getElementById("snScoreOne");
+let snPointsOne = document.getElementById("snPointsOne");
+let snScoreTwo = document.getElementById("snScoreTwo");
+let snPointsTwo = document.getElementById("snPointsTwo");
+let snScoreThree = document.getElementById("snScoreThree");
+let snPointsThree = document.getElementById("snPointsThree");
+let scScoreOne = document.getElementById("scScoreOne");
+let scPointsOne = document.getElementById("scPointsOne");
+let scTimeOne = document.getElementById("scTimeOne");
+let scScoreTwo = document.getElementById("scScoreTwo");
+let scPointsTwo = document.getElementById("scPointsTwo");
+let scTimeTwo = document.getElementById("scTimeTwo");
 let TPoints = document.getElementById("TPoints");
 let competitorCountry = document.getElementById("country");
 let competitorCategory = document.getElementById("category");
@@ -56,6 +65,7 @@ adminBtn.addEventListener("click", function () {
   loginPage.style.opacity = "1";
   loginPage.style.width = "100vw";
 });
+
 closeLoginBtn.addEventListener("click", function () {
   loginPage.style.width = "0";
   loginPage.style.opacity = "0";
@@ -117,36 +127,50 @@ images5Score.onkeyup = function () {
     Math.round((images5Score.value / imagesStandards) * 1000 * 100) / 100;
   getTotalPoints();
 };
+
 // get binary pts
 binary5Score.onkeyup = function () {
   binary5Points.value =
     Math.round((binary5Score.value / binaryStandards) * 1000 * 100) / 100;
   getTotalPoints();
 };
+
 // get 5-Min Numbers pts
-number5Score.onkeyup = function () {
-  number5Points.value =
-    Math.round((number5Score.value / speedNumbersStandards) * 1000 * 100) / 100;
+number5ScoreOne.onkeyup = function () {
+  number5PointsOne.value =
+    Math.round((number5ScoreOne.value / speedNumbersStandards) * 1000 * 100) /
+    100;
   getTotalPoints();
 };
+
+number5ScoreTwo.onkeyup = function () {
+  number5PointsTwo.value =
+    Math.round((number5ScoreTwo.value / speedNumbersStandards) * 1000 * 100) /
+    100;
+  getTotalPoints();
+};
+
 // get 15-Min Numbers pts
 number15Score.onkeyup = function () {
   number15Points.value =
     Math.round((number15Score.value / longNumbersStandards) * 1000 * 100) / 100;
   getTotalPoints();
 };
+
 // get 5-Min Names&faces pts
 names5Score.onkeyup = function () {
   names5Points.value =
     Math.round((names5Score.value / namesAndFacesStandards) * 1000 * 100) / 100;
   getTotalPoints();
 };
+
 // get 5-Min Dates pts
 dates5Score.onkeyup = function () {
   dates5Points.value =
     Math.round((dates5Score.value / datesStandards) * 1000 * 100) / 100;
   getTotalPoints();
 };
+
 // get 5-Min Words pts
 words5Score.onkeyup = function () {
   words5Points.value =
@@ -160,36 +184,70 @@ cards10Score.onkeyup = function () {
     Math.round((cards10Score.value / longCardsStandards) * 1000 * 100) / 100;
   getTotalPoints();
 };
+
 // get spoken numbers Cards pts
-snScore.onkeyup = function () {
-  snPoints.value =
-    Math.round(Math.sqrt(snScore.value) * spokenStandards * 100) / 100;
+snScoreOne.onkeyup = function () {
+  snPointsOne.value =
+    Math.round(Math.sqrt(snScoreOne.value) * spokenStandards * 100) / 100;
   getTotalPoints();
 };
+snScoreTwo.onkeyup = function () {
+  snPointsTwo.value =
+    Math.round(Math.sqrt(snScoreTwo.value) * spokenStandards * 100) / 100;
+  getTotalPoints();
+};
+snScoreThree.onkeyup = function () {
+  snPointsThree.value =
+    Math.round(Math.sqrt(snScoreThree.value) * spokenStandards * 100) / 100;
+  getTotalPoints();
+};
+
 // get Speed Cards pts
-function getscPoints() {
-  scScore.innerHTML = 52;
-  if (scTime.value < 300 && scScore.value == 52) {
-    scPoints.value =
-      Math.round((6862 / Math.pow(scTime.value, 0.75)) * 100) / 100;
-  } else if (scScore.value <= 52 && scTime.value == 300) {
-    scPoints.value = Math.round((scScore.value / 52) * 95.6 * 100) / 100;
-  } else if (scScore.value <= 52 && scTime.value != 300) {
-    scPoints.value = Math.round((scScore.value / 52) * 95.6 * 100) / 100;
+function getscPointsOne() {
+  scScoreOne.innerHTML = 52;
+  if (
+    +scTimeOne.value < 300 &&
+    scTimeOne.value !== "" &&
+    +scScoreOne.value === 52
+  ) {
+    scPointsOne.value =
+      Math.round((6862 / Math.pow(scTimeOne.value, 0.75)) * 100) / 100;
+  } else if (+scScoreOne.value <= 52 && +scTimeOne.value === 300) {
+    scPointsOne.value = Math.round((scScoreOne.value / 52) * 95.6 * 100) / 100;
+  } else if (+scScoreOne.value <= 52 && +scTimeOne.value !== 300) {
+    scPointsOne.value = Math.round((scScoreOne.value / 52) * 95.6 * 100) / 100;
   }
   getTotalPoints();
 }
+
+function getscPointsTwo() {
+  scScoreTwo.innerHTML = 52;
+  if (
+    +scTimeTwo.value < 300 &&
+    scTimeTwo.value !== "" &&
+    +scScoreTwo.value === 52
+  ) {
+    scPointsTwo.value =
+      Math.round((6862 / Math.pow(scTimeTwo.value, 0.75)) * 100) / 100;
+  } else if (+scScoreTwo.value <= 52 && +scTimeTwo.value === 300) {
+    scPointsTwo.value = Math.round((scScoreTwo.value / 52) * 95.6 * 100) / 100;
+  } else if (+scScoreTwo.value <= 52 && +scTimeTwo.value !== 300) {
+    scPointsTwo.value = Math.round((scScoreTwo.value / 52) * 95.6 * 100) / 100;
+  }
+  getTotalPoints();
+}
+
 function getTotalPoints() {
   TPoints.value =
     Math.round(
-      (+scPoints.value +
-        +snPoints.value +
+      (Math.max(+scPointsOne.value, +scPointsTwo.value) +
+        Math.max(+snPointsOne.value, +snPointsTwo.value, +snPointsThree.value) +
         +cards10Points.value +
         +words5Points.value +
         +dates5Points.value +
         +names5Points.value +
         +number15Points.value +
-        +number5Points.value +
+        Math.max(+number5PointsOne.value, +number5PointsTwo.value) +
         +binary5Points.value +
         +images5Points.value) *
         100
@@ -214,7 +272,7 @@ const showTasks = async () => {
 
     if (tasks.length < 1) {
       document.getElementById("tbody").innerHTML = `<tr class="empty-list">
-          <td colspan="29">No data to show</td>
+          <td colspan="38">No data to show</td>
         </tr>`;
 
       loadingDOM.style.visibility = "hidden";
@@ -236,14 +294,19 @@ const showTasks = async () => {
         images,
         binary,
         longNumbers,
-        speedNumbers,
+        speedNumbersOne,
+        speedNumbersTwo,
         namesAndFaces,
         words,
         longCards,
         dates,
-        spoken,
-        speedCardsScore,
-        speedCardsTime,
+        spokenOne,
+        spokenTwo,
+        spokenThree,
+        speedCardsScoreOne,
+        speedCardsTimeOne,
+        speedCardsScoreTwo,
+        speedCardsTimeTwo,
       } = tasks[i];
 
       let imagesPoints =
@@ -252,40 +315,60 @@ const showTasks = async () => {
         Math.round((binary / binaryStandards) * 1000 * 100) / 100;
       let longNumbersPoints =
         Math.round((longNumbers / longNumbersStandards) * 1000 * 100) / 100;
-      let speedNumbersPoints =
-        Math.round((speedNumbers / speedNumbersStandards) * 1000 * 100) / 100;
+      let speedNumbersPointsOne =
+        Math.round((speedNumbersOne / speedNumbersStandards) * 1000 * 100) /
+        100;
+      let speedNumbersPointsTwo =
+        Math.round((speedNumbersTwo / speedNumbersStandards) * 1000 * 100) /
+        100;
       let namesAndFacesPoints =
         Math.round((namesAndFaces / namesAndFacesStandards) * 1000 * 100) / 100;
       let wordsPoints = Math.round((words / wordsStandards) * 1000 * 100) / 100;
       let datesPoints = Math.round((dates / datesStandards) * 1000 * 100) / 100;
       let longCardsPoints =
         Math.round((longCards / longCardsStandards) * 1000 * 100) / 100;
-      let spokenPoints =
-        Math.round(Math.sqrt(spoken) * spokenStandards * 100) / 100;
-      let speedCardsPoints = () => {
-        if (speedCardsTime < 300 && speedCardsScore == 52) {
+      let spokenPointsOne =
+        Math.round(Math.sqrt(spokenOne) * spokenStandards * 100) / 100;
+      let spokenPointsTwo =
+        Math.round(Math.sqrt(spokenTwo) * spokenStandards * 100) / 100;
+      let spokenPointsThree =
+        Math.round(Math.sqrt(spokenThree) * spokenStandards * 100) / 100;
+
+      let speedCardsPointsOne = () => {
+        if (speedCardsTimeOne < 300 && speedCardsScoreOne == 52) {
           return (
-            Math.round((6862 / Math.pow(speedCardsTime, 0.75)) * 100) / 100
+            Math.round((6862 / Math.pow(speedCardsTimeOne, 0.75)) * 100) / 100
           );
-        } else if (speedCardsScore <= 52 && speedCardsTime == 300) {
-          return (scPoints.value =
-            Math.round((speedCardsScore / 52) * 95.6 * 100) / 100);
-        } else if (speedCardsScore <= 52 && speedCardsTime != 300) {
-          return (scPoints.value =
-            Math.round((speedCardsScore / 52) * 95.6 * 100) / 100);
+        } else if (speedCardsScoreOne <= 52 && speedCardsTimeOne == 300) {
+          return Math.round((speedCardsScoreOne / 52) * 95.6 * 100) / 100;
+        } else if (speedCardsScoreOne <= 52 && speedCardsTimeOne != 300) {
+          return Math.round((speedCardsScoreOne / 52) * 95.6 * 100) / 100;
         }
       };
+
+      let speedCardsPointsTwo = () => {
+        if (speedCardsTimeTwo < 300 && speedCardsScoreTwo == 52) {
+          return (
+            Math.round((6862 / Math.pow(speedCardsTimeTwo, 0.75)) * 100) / 100
+          );
+        } else if (speedCardsScoreTwo <= 52 && speedCardsTimeTwo == 300) {
+          return Math.round((speedCardsScoreTwo / 52) * 95.6 * 100) / 100;
+        } else if (speedCardsScoreTwo <= 52 && speedCardsTimeTwo != 300) {
+          return Math.round((speedCardsScoreTwo / 52) * 95.6 * 100) / 100;
+        }
+      };
+
       let overallPoints =
         imagesPoints +
         binaryPoints +
         longNumbersPoints +
-        speedNumbersPoints +
+        Math.max(speedNumbersPointsOne, speedNumbersPointsTwo) +
         namesAndFacesPoints +
         wordsPoints +
         datesPoints +
         longCardsPoints +
-        spokenPoints +
-        speedCardsPoints();
+        Math.max(spokenPointsOne, spokenPointsTwo, spokenPointsThree) +
+        Math.max(speedCardsPointsOne(), speedCardsPointsTwo());
 
       overallPoints = Math.round(overallPoints * 100) / 100;
 
@@ -311,8 +394,10 @@ const showTasks = async () => {
               <td>${imagesPoints}</td>
               <td>${binary || ""}</td>
               <td>${binaryPoints}</td>
-              <td>${speedNumbers || ""}</td>
-              <td>${speedNumbersPoints}</td>
+              <td>${speedNumbersOne || ""}</td>
+              <td>${speedNumbersPointsOne}</td>
+              <td>${speedNumbersTwo || ""}</td>
+              <td>${speedNumbersPointsTwo}</td>
               <td>${longNumbers || ""}</td>
               <td>${longNumbersPoints}</td>
               <td>${namesAndFaces || ""}</td>
@@ -323,11 +408,18 @@ const showTasks = async () => {
               <td>${wordsPoints}</td>
               <td>${longCards || ""}</td>
               <td>${longCardsPoints}</td>
-              <td>${spoken || ""}</td>
-              <td>${spokenPoints}</td>
-              <td>${speedCardsScore || ""}</td>
-              <td>${speedCardsTime || ""}</td>
-              <td>${speedCardsPoints()}</td>
+              <td>${spokenOne || ""}</td>
+              <td>${spokenPointsOne}</td>
+              <td>${spokenTwo || ""}</td>
+              <td>${spokenPointsTwo}</td>
+              <td>${spokenOne || ""}</td>
+              <td>${spokenPointsTwo}</td>
+              <td>${speedCardsScoreOne || ""}</td>
+              <td>${speedCardsTimeOne || ""}</td>
+              <td>${speedCardsPointsOne()}</td>
+              <td>${speedCardsScoreTwo || ""}</td>
+              <td>${speedCardsTimeTwo || ""}</td>
+              <td>${speedCardsPointsTwo()}</td>
               <td class="total">${overallPoints}</td>
               <td class="Rank"></td>
               ${
@@ -349,29 +441,37 @@ const showTasks = async () => {
     rankTotal();
     showImageTable();
     showBinaryTable();
-    showNumber5Table();
+    showNumber5TableOne();
+    showNumber5TableTwo();
     showWordsTable();
     showNumbers15Table();
     showNamesTable();
     showDatesTable();
     showCardsTable();
-    showSNTable();
-    showSCTable();
+    showSNTableOne();
+    showSNTableTwo();
+    showSNTableThree();
+    showSCTableOne();
+    showSCTableTwo();
     sortTable();
     rankTotal();
     rankBin();
     rankImg();
-    rankNum5();
+    rankNum5One();
+    rankNum5Two();
     rankNum15();
     rankWor();
     rankNam();
     rankDat();
     rankCar();
-    rankSN();
-    rankSC();
+    rankSNOne();
+    rankSNTwo();
+    rankSNThree();
+    rankSCOne();
+    rankSCTwo();
   } catch (error) {
     document.getElementById("tbody").innerHTML =
-      '<tr class="empty-list"><td colspan="29">There was an error, please try again later....</td></tr>';
+      '<tr class="empty-list"><td colspan="38">There was an error, please try again later....</td></tr>';
   }
 
   loadingDOM.style.visibility = "hidden";
@@ -408,7 +508,6 @@ function prevTable() {
 
 let allTables = document.querySelectorAll(".competitors-table");
 let allNav = document.querySelectorAll(".pagination .container a");
-
 function displayOneTable(tableId, btnId) {
   allTables.forEach((table) => {
     table.style.display = "none";
@@ -435,9 +534,13 @@ function displyBinaryTable() {
   displayOneTable("bin-table", "bin-btn");
   sortBinTable();
 }
-function displyNumbers5Table() {
-  displayOneTable("num5-table", "num5-btn");
-  sortNum5Table();
+function displyNumbers5TableOne() {
+  displayOneTable("num5-table-one", "num5-btn-one");
+  sortNum5TableOne();
+}
+function displyNumbers5TableTwo() {
+  displayOneTable("num5-table-two", "num5-btn-two");
+  sortNum5TableTwo();
 }
 function displyWordsTable() {
   displayOneTable("wor-table", "wor-btn");
@@ -459,17 +562,28 @@ function displyCardsTable() {
   displayOneTable("car-table", "car-btn");
   sortCarTable();
 }
-function displySNTable() {
-  displayOneTable("sn-table", "sn-btn");
-  sortSNTable();
+function displySNTableOne() {
+  displayOneTable("sn-table-one", "sn-btn-one");
+  sortSNTableOne();
 }
-function displySCTable() {
-  displayOneTable("sc-table", "sc-btn");
-  sortSCTable();
+function displySNTableTwo() {
+  displayOneTable("sn-table-two", "sn-btn-two");
+  sortSNTableTwo();
+}
+function displySNTableThree() {
+  displayOneTable("sn-table-three", "sn-btn-three");
+  sortSNTableThree();
+}
+function displySCTableOne() {
+  displayOneTable("sc-table-one", "sc-btn-one");
+  sortSCTableOne();
+}
+function displySCTableTwo() {
+  displayOneTable("sc-table-two", "sc-btn-two");
+  sortSCTableTwo();
 }
 
 // enter to go to next field
-
 var allField = document.querySelectorAll(".score-input");
 for (var i = 0; i < allField.length; i++) {
   allField[i].addEventListener("keyup", function (event) {
@@ -533,12 +647,12 @@ function showBinaryTable() {
   document.getElementById("binTable").innerHTML = bintable;
 }
 
-function rankNum5() {
-  rankOneTable(".num5Rank");
+function rankNum5One() {
+  rankOneTable(".num5RankOne");
 }
-rankNum5();
+rankNum5One();
 
-function showNumber5Table() {
+function showNumber5TableOne() {
   let num5table = "";
   for (let i = 0; i < competitorData.length; i++)
     num5table += `
@@ -547,10 +661,11 @@ function showNumber5Table() {
                 <td>${competitorData[i].country}</td>
                 <td>${competitorData[i].category}</td>
                 <td>${competitorData[i].IAMID || ""}</td>
-                <td>${competitorData[i].speedNumbers || ""}</td>
-                <td class="num5Rank">${
+                <td>${competitorData[i].speedNumbersOne || ""}</td>
+                <td class="num5RankOne">${
                   Math.round(
-                    (competitorData[i].speedNumbers / speedNumbersStandards) *
+                    (competitorData[i].speedNumbersOne /
+                      speedNumbersStandards) *
                       1000 *
                       100
                   ) / 100
@@ -558,13 +673,43 @@ function showNumber5Table() {
                 <td class="Rank"></td>
             </tr>
     `;
-  document.getElementById("num5Table").innerHTML = num5table;
+  document.getElementById("num5TableOne").innerHTML = num5table;
+}
+
+function rankNum5Two() {
+  rankOneTable(".num5RankTwo");
+}
+rankNum5Two();
+
+function showNumber5TableTwo() {
+  let num5table = "";
+  for (let i = 0; i < competitorData.length; i++)
+    num5table += `
+    <tr>      
+                <td id="nameWidth">${competitorData[i].name}</td>
+                <td>${competitorData[i].country}</td>
+                <td>${competitorData[i].category}</td>
+                <td>${competitorData[i].IAMID || ""}</td>
+                <td>${competitorData[i].speedNumbersTwo || ""}</td>
+                <td class="num5RankTwo">${
+                  Math.round(
+                    (competitorData[i].speedNumbersTwo /
+                      speedNumbersStandards) *
+                      1000 *
+                      100
+                  ) / 100
+                }</td>
+                <td class="Rank"></td>
+            </tr>
+    `;
+  document.getElementById("num5TableTwo").innerHTML = num5table;
 }
 
 function rankWor() {
   rankOneTable(".worRank");
 }
 rankWor();
+
 function showWordsTable() {
   let wortable = "";
   for (let i = 0; i < competitorData.length; i++)
@@ -648,9 +793,9 @@ function rankDat() {
 rankDat();
 
 function showDatesTable() {
-  let dattable = "";
+  let dateTable = "";
   for (let i = 0; i < competitorData.length; i++)
-    dattable += `
+    dateTable += `
     <tr>
                 <td id="nameWidth">${competitorData[i].name}</td>
                 <td>${competitorData[i].country}</td>
@@ -665,7 +810,7 @@ function showDatesTable() {
                 <td class="Rank"></td>
             </tr>
     `;
-  document.getElementById("datTable").innerHTML = dattable;
+  document.getElementById("datTable").innerHTML = dateTable;
 }
 
 function rankCar() {
@@ -694,81 +839,194 @@ function showCardsTable() {
   document.getElementById("carTable").innerHTML = cartable;
 }
 
-function rankSN() {
-  rankOneTable(".snRank");
+function rankSNOne() {
+  rankOneTable(".snRankOne");
 }
-rankSN();
+rankSNOne();
 
-function showSNTable() {
-  let sntable = "";
+function showSNTableOne() {
+  let snTable = "";
   for (let i = 0; i < competitorData.length; i++)
-    sntable += `
+    snTable += `
     <tr>
                 <td id="nameWidth">${competitorData[i].name}</td>
                 <td>${competitorData[i].country}</td>
                 <td>${competitorData[i].category}</td>
                 <td>${competitorData[i].IAMID || ""}</td>
-                <td>${competitorData[i].spoken || ""}</td>
-                <td class="snRank">${
+                <td>${competitorData[i].spokenOne || ""}</td>
+                <td class="snRankOne">${
                   Math.round(
-                    Math.sqrt(competitorData[i].spoken) * spokenStandards * 100
+                    Math.sqrt(competitorData[i].spokenOne) *
+                      spokenStandards *
+                      100
                   ) / 100
                 }</td>
                 <td class="Rank"></td>
             </tr>
     `;
-  document.getElementById("snTable").innerHTML = sntable;
+  document.getElementById("snTableOne").innerHTML = snTable;
 }
 
-function rankSC() {
-  rankOneTable(".scRank");
+function rankSNTwo() {
+  rankOneTable(".snRankTwo");
 }
-rankSC();
+rankSNTwo();
 
-function showSCTable() {
-  let sctable = "";
-  for (let i = 0; i < competitorData.length; i++) {
-    let speedCardsPoints = () => {
-      if (
-        competitorData[i].speedCardsTime < 300 &&
-        competitorData[i].speedCardsScore == 52
-      ) {
-        return (
-          Math.round(
-            (6862 / Math.pow(competitorData[i].speedCardsTime, 0.75)) * 100
-          ) / 100
-        );
-      } else if (
-        competitorData[i].speedCardsScore <= 52 &&
-        competitorData[i].speedCardsTime == 300
-      ) {
-        return (scPoints.value =
-          Math.round((competitorData[i].speedCardsScore / 52) * 95.6 * 100) /
-          100);
-      } else if (
-        competitorData[i].speedCardsScore <= 52 &&
-        competitorData[i].speedCardsTime != 300
-      ) {
-        return (scPoints.value =
-          Math.round((competitorData[i].speedCardsScore / 52) * 95.6 * 100) /
-          100);
-      }
-    };
-
-    sctable += `
+function showSNTableTwo() {
+  let snTable = "";
+  for (let i = 0; i < competitorData.length; i++)
+    snTable += `
     <tr>
                 <td id="nameWidth">${competitorData[i].name}</td>
                 <td>${competitorData[i].country}</td>
                 <td>${competitorData[i].category}</td>
                 <td>${competitorData[i].IAMID || ""}</td>
-                <td>${competitorData[i].speedCardsScore || ""}</td>
-                <td>${competitorData[i].speedCardsTime || ""}</td>
-                <td class="scRank">${speedCardsPoints()}</td>
+                <td>${competitorData[i].spokenTwo || ""}</td>
+                <td class="snRankTwo">${
+                  Math.round(
+                    Math.sqrt(competitorData[i].spokenTwo) *
+                      spokenStandards *
+                      100
+                  ) / 100
+                }</td>
+                <td class="Rank"></td>
+            </tr>
+    `;
+  document.getElementById("snTableTwo").innerHTML = snTable;
+}
+
+function rankSNThree() {
+  rankOneTable(".snRankThree");
+}
+rankSNThree();
+
+function showSNTableThree() {
+  let snTable = "";
+  for (let i = 0; i < competitorData.length; i++)
+    snTable += `
+    <tr>
+                <td id="nameWidth">${competitorData[i].name}</td>
+                <td>${competitorData[i].country}</td>
+                <td>${competitorData[i].category}</td>
+                <td>${competitorData[i].IAMID || ""}</td>
+                <td>${competitorData[i].spokenThree || ""}</td>
+                <td class="snRankThree">${
+                  Math.round(
+                    Math.sqrt(competitorData[i].spokenThree) *
+                      spokenStandards *
+                      100
+                  ) / 100
+                }</td>
+                <td class="Rank"></td>
+            </tr>
+    `;
+  document.getElementById("snTableThree").innerHTML = snTable;
+}
+
+function rankSCOne() {
+  rankOneTable(".scRankOne");
+}
+rankSCOne();
+
+function showSCTableOne() {
+  let scTable = "";
+  for (let i = 0; i < competitorData.length; i++) {
+    let speedCardsPoints = () => {
+      if (
+        competitorData[i].speedCardsTimeOne < 300 &&
+        competitorData[i].speedCardsScoreOne == 52
+      ) {
+        return (
+          Math.round(
+            (6862 / Math.pow(competitorData[i].speedCardsTimeOne, 0.75)) * 100
+          ) / 100
+        );
+      } else if (
+        competitorData[i].speedCardsScoreOne <= 52 &&
+        competitorData[i].speedCardsTimeOne == 300
+      ) {
+        return (
+          Math.round((competitorData[i].speedCardsScoreOne / 52) * 95.6 * 100) /
+          100
+        );
+      } else if (
+        competitorData[i].speedCardsScoreOne <= 52 &&
+        competitorData[i].speedCardsTimeOne != 300
+      ) {
+        return (
+          Math.round((competitorData[i].speedCardsScoreOne / 52) * 95.6 * 100) /
+          100
+        );
+      }
+    };
+
+    scTable += `
+    <tr>
+                <td id="nameWidth">${competitorData[i].name}</td>
+                <td>${competitorData[i].country}</td>
+                <td>${competitorData[i].category}</td>
+                <td>${competitorData[i].IAMID || ""}</td>
+                <td>${competitorData[i].speedCardsScoreOne || ""}</td>
+                <td>${competitorData[i].speedCardsTimeOne || ""}</td>
+                <td class="scRankOne">${speedCardsPoints()}</td>
                 <td class="Rank"></td>
             </tr>
     `;
   }
-  document.getElementById("scTable").innerHTML = sctable;
+  document.getElementById("scTableOne").innerHTML = scTable;
+}
+
+function rankSCTwo() {
+  rankOneTable(".scRankTwo");
+}
+rankSCTwo();
+
+function showSCTableTwo() {
+  let scTable = "";
+  for (let i = 0; i < competitorData.length; i++) {
+    let speedCardsPoints = () => {
+      if (
+        competitorData[i].speedCardsTimeTwo < 300 &&
+        competitorData[i].speedCardsScoreTwo == 52
+      ) {
+        return (
+          Math.round(
+            (6862 / Math.pow(competitorData[i].speedCardsTimeTwo, 0.75)) * 100
+          ) / 100
+        );
+      } else if (
+        competitorData[i].speedCardsScoreTwo <= 52 &&
+        competitorData[i].speedCardsTimeTwo == 300
+      ) {
+        return (
+          Math.round((competitorData[i].speedCardsScoreTwo / 52) * 95.6 * 100) /
+          100
+        );
+      } else if (
+        competitorData[i].speedCardsScoreTwo <= 52 &&
+        competitorData[i].speedCardsTimeTwo != 300
+      ) {
+        return (
+          Math.round((competitorData[i].speedCardsScoreTwo / 52) * 95.6 * 100) /
+          100
+        );
+      }
+    };
+
+    scTable += `
+    <tr>
+                <td id="nameWidth">${competitorData[i].name}</td>
+                <td>${competitorData[i].country}</td>
+                <td>${competitorData[i].category}</td>
+                <td>${competitorData[i].IAMID || ""}</td>
+                <td>${competitorData[i].speedCardsScoreTwo || ""}</td>
+                <td>${competitorData[i].speedCardsTimeTwo || ""}</td>
+                <td class="scRankTwo">${speedCardsPoints()}</td>
+                <td class="Rank"></td>
+            </tr>
+    `;
+  }
+  document.getElementById("scTableTwo").innerHTML = scTable;
 }
 
 // // delete task /api/tasks/:id
@@ -794,10 +1052,12 @@ document.getElementById("tbody").addEventListener("click", async (e) => {
   loadingDOM.style.visibility = "hidden";
 });
 
+let addCompetitorBtn = document.getElementById("AddCompetitor");
 // form
 if (loggedIn) {
-  document.getElementById("AddCompetitor").onclick = async (e) => {
+  addCompetitorBtn.onclick = async (e) => {
     e.preventDefault();
+    addCompetitorBtn.classList.add("disabled");
 
     const name = competitorName.value;
     const IAMID = iamId.value;
@@ -806,13 +1066,18 @@ if (loggedIn) {
     const images = images5Score.value;
     const binary = binary5Score.value;
     const longNumbers = number15Score.value;
-    const speedNumbers = number5Score.value;
+    const speedNumbersOne = number5ScoreOne.value;
+    const speedNumbersTwo = number5ScoreTwo.value;
     const namesAndFaces = names5Score.value;
     const words = words5Score.value;
     const dates = dates5Score.value;
-    const spoken = snScore.value;
-    const speedCardsScore = scScore.value;
-    const speedCardsTime = scTime.value;
+    const spokenOne = snScoreOne.value;
+    const spokenTwo = snScoreTwo.value;
+    const spokenThree = snScoreThree.value;
+    const speedCardsScoreOne = scScoreOne.value;
+    const speedCardsTimeOne = scTimeOne.value;
+    const speedCardsScoreTwo = scScoreTwo.value;
+    const speedCardsTimeTwo = scTimeTwo.value;
     const longCards = cards10Score.value;
 
     try {
@@ -825,13 +1090,18 @@ if (loggedIn) {
         binary,
         longCards,
         longNumbers,
-        speedNumbers,
+        speedNumbersOne,
+        speedNumbersTwo,
         namesAndFaces,
         words,
         dates,
-        spoken,
-        speedCardsScore,
-        speedCardsTime,
+        spokenOne,
+        spokenTwo,
+        spokenThree,
+        speedCardsScoreOne,
+        speedCardsTimeOne,
+        speedCardsScoreTwo,
+        speedCardsTimeTwo,
       });
       showTasks();
       clearData();
@@ -842,12 +1112,15 @@ if (loggedIn) {
       if (competitorName.value === "") {
         formAlertDOM.innerHTML = `error, name can't be empty!`;
       } else {
+        console.log(error);
         formAlertDOM.innerHTML = `error, something went wrong, please try again later!`;
       }
       formAlertDOM.style.display = "block";
       formAlertDOM.style.color = "#e91e45";
     }
+
     setTimeout(() => {
+      addCompetitorBtn.classList.remove("disabled");
       formAlertDOM.style.display = "none";
     }, 3000);
   };
@@ -862,8 +1135,10 @@ function clearData() {
   images5Points.value = "";
   binary5Score.value = "";
   binary5Points.value = "";
-  number5Score.value = "";
-  number5Points.value = "";
+  number5ScoreOne.value = "";
+  number5PointsOne.value = "";
+  number5ScoreTwo.value = "";
+  number5PointsTwo.value = "";
   words5Score.value = "";
   words5Points.value = "";
   number15Score.value = "";
@@ -874,11 +1149,18 @@ function clearData() {
   dates5Points.value = "";
   cards10Score.value = "";
   cards10Points.value = "";
-  snScore.value = "";
-  snPoints.value = "";
-  scScore.value = "";
-  scPoints.value = "";
-  scTime.value = "";
+  snScoreOne.value = "";
+  snPointsOne.value = "";
+  snScoreTwo.value = "";
+  snPointsTwo.value = "";
+  snScoreThree.value = "";
+  snPointsThree.value = "";
+  scScoreOne.value = "";
+  scPointsOne.value = "";
+  scTimeOne.value = "";
+  scScoreTwo.value = "";
+  scPointsTwo.value = "";
+  scTimeTwo.value = "";
   TPoints.value = "0";
 }
 
@@ -989,7 +1271,7 @@ function sortOneTableString(tbodyId, coloNumber) {
 }
 
 function sortTable() {
-  sortOneTable("tbody", loggedIn ? 26 : 25);
+  sortOneTable("tbody", loggedIn ? 35 : 36);
 }
 sortTable();
 
@@ -1043,23 +1325,42 @@ function sortAlphabitBinTable() {
   sortOneTableString("binTable", 0);
 }
 
-function sortNum5Table() {
-  sortOneTable("num5Table", 5);
+function sortNum5TableOne() {
+  sortOneTable("num5TableOne", 5);
 }
 
-function sortCountryNum5Table() {
-  sortNum5Table();
-  sortOneTableString("num5Table", 1);
+function sortCountryNum5TableOne() {
+  sortNum5TableOne();
+  sortOneTableString("num5TableOne", 1);
 }
 
-function sortCategoryNum5Table() {
-  sortNum5Table();
-  sortOneTableString("num5Table", 2);
+function sortCategoryNum5TableOne() {
+  sortNum5TableOne();
+  sortOneTableString("num5TableOne", 2);
 }
 
-function sortAlphabitNum5Table() {
-  sortNum5Table();
-  sortOneTableString("num5Table", 0);
+function sortAlphabitNum5TableOne() {
+  sortNum5TableOne();
+  sortOneTableString("num5TableOne", 0);
+}
+
+function sortNum5TableTwo() {
+  sortOneTable("num5TableTwo", 5);
+}
+
+function sortCountryNum5TableTwo() {
+  sortNum5TableTwo();
+  sortOneTableString("num5TableTwo", 1);
+}
+
+function sortCategoryNum5TableTwo() {
+  sortNum5TableTwo();
+  sortOneTableString("num5TableTwo", 2);
+}
+
+function sortAlphabitNum5TableTwo() {
+  sortNum5TableTwo();
+  sortOneTableString("num5TableTwo", 0);
 }
 
 function sortWorTable() {
@@ -1157,42 +1458,99 @@ function sortAlphabitCarTable() {
   sortOneTableString("carTable", 0);
 }
 
-function sortSNTable() {
-  sortOneTable("snTable", 5);
+function sortSNTableOne() {
+  sortOneTable("snTableOne", 5);
 }
 
-function sortCountrySNTable() {
-  sortSNTable();
-  sortOneTableString("snTable", 1);
+function sortCountrySNTableOne() {
+  sortSNTableOne();
+  sortOneTableString("snTableOne", 1);
 }
 
-function sortCategorySNTable() {
-  sortSNTable();
-  sortOneTableString("snTable", 2);
+function sortCategorySNTableOne() {
+  sortSNTableOne();
+  sortOneTableString("snTableOne", 2);
 }
 
-function sortAlphabitSNTable() {
-  sortSNTable();
-  sortOneTableString("snTable", 0);
+function sortAlphabitSNTableOne() {
+  sortSNTableOne();
+  sortOneTableString("snTableOne", 0);
 }
 
-function sortSCTable() {
-  sortOneTable("scTable", 6);
+function sortSNTableTwo() {
+  sortOneTable("snTableTwo", 5);
 }
 
-function sortCountrySCTable() {
-  sortSCTable();
-  sortOneTableString("scTable", 1);
+function sortCountrySNTableTwo() {
+  sortSNTableTwo();
+  sortOneTableString("snTableTwo", 1);
 }
 
-function sortCategorySCTable() {
-  sortSCTable();
-  sortOneTableString("scTable", 2);
+function sortCategorySNTableTwo() {
+  sortSNTableTwo();
+  sortOneTableString("snTableTwo", 2);
 }
 
-function sortAlphabitSCTable() {
-  sortSCTable();
-  sortOneTableString("scTable", 0);
+function sortAlphabitSNTableTwo() {
+  sortSNTableTwo();
+  sortOneTableString("snTableTwo", 0);
+}
+
+function sortSNTableThree() {
+  sortOneTable("snTableThree", 5);
+}
+
+function sortCountrySNTableThree() {
+  sortSNTableThree();
+  sortOneTableString("snTableThree", 1);
+}
+
+function sortCategorySNTableThree() {
+  sortSNTableThree();
+  sortOneTableString("snTableThree", 2);
+}
+
+function sortAlphabitSNTableThree() {
+  sortSNTableThree();
+  sortOneTableString("snTableThree", 0);
+}
+
+function sortSCTableOne() {
+  sortOneTable("scTableOne", 6);
+}
+
+function sortCountrySCTableOne() {
+  sortSCTableOne();
+  sortOneTableString("scTableOne", 1);
+}
+
+function sortCategorySCTableOne() {
+  sortSCTableOne();
+  sortOneTableString("scTableOne", 2);
+}
+
+function sortAlphabitSCTableOne() {
+  sortSCTableOne();
+  sortOneTableString("scTableOne", 0);
+}
+
+function sortSCTableTwo() {
+  sortOneTable("scTableTwo", 6);
+}
+
+function sortCountrySCTableTwo() {
+  sortSCTableTwo();
+  sortOneTableString("scTableTwo", 1);
+}
+
+function sortCategorySCTableTwo() {
+  sortSCTableTwo();
+  sortOneTableString("scTableTwo", 2);
+}
+
+function sortAlphabitSCTableTwo() {
+  sortSCTableTwo();
+  sortOneTableString("scTableTwo", 0);
 }
 
 let searchMood = "name";
@@ -1210,22 +1568,28 @@ function getSearchMood(id) {
   showTasks();
   showImageTable();
   showBinaryTable();
-  showNumber5Table();
+  showNumber5TableOne();
+  showNumber5TableTwo();
   showWordsTable();
   showNumbers15Table();
   showNamesTable();
   showDatesTable();
   showCardsTable();
-  showSNTable();
-  showSCTable();
+  showSNTableOne();
+  showSNTableTwo();
+  showSNTableThree();
+  showSCTableOne();
+  showSCTableTwo();
   sortTable();
   rankTotal();
   rankBin();
   sortBinTable();
   rankImg();
   sortImgTable();
-  rankNum5();
-  sortNum5Table();
+  rankNum5One();
+  rankNum5Two();
+  sortNum5TableOne();
+  sortNum5TableTwo();
   rankNum15();
   sortNum15Table();
   rankWor();
@@ -1236,17 +1600,23 @@ function getSearchMood(id) {
   sortDatTable();
   rankCar();
   sortCarTable();
-  rankSN();
-  sortSNTable();
-  rankSC();
-  sortSCTable();
+  rankSNOne();
+  rankSNTwo();
+  rankSNThree();
+  sortSNTableOne();
+  sortSNTableTwo();
+  sortSNTableThree();
+  rankSCOne();
+  rankSCTwo();
+  sortSCTableOne();
+  sortSCTableTwo();
 }
 
 function searchCompetitors(value) {
   let table = "";
   if (searchMood == "name") {
     for (let i = 0; i < competitorData.length; i++) {
-      if (competitorData[i].name.includes(value.toLowerCase())) {
+      if (competitorData[i].name.toLowerCase().includes(value.toLowerCase())) {
         const {
           completed,
           _id: taskID,
@@ -1257,14 +1627,19 @@ function searchCompetitors(value) {
           images,
           binary,
           longNumbers,
-          speedNumbers,
+          speedNumbersOne,
+          speedNumbersTwo,
           namesAndFaces,
           words,
           longCards,
           dates,
-          spoken,
-          speedCardsScore,
-          speedCardsTime,
+          spokenOne,
+          spokenTwo,
+          spokenThree,
+          speedCardsScoreOne,
+          speedCardsTimeOne,
+          speedCardsScoreTwo,
+          speedCardsTimeTwo,
         } = competitorData[i];
 
         let imagesPoints =
@@ -1273,8 +1648,12 @@ function searchCompetitors(value) {
           Math.round((binary / binaryStandards) * 1000 * 100) / 100;
         let longNumbersPoints =
           Math.round((longNumbers / longNumbersStandards) * 1000 * 100) / 100;
-        let speedNumbersPoints =
-          Math.round((speedNumbers / speedNumbersStandards) * 1000 * 100) / 100;
+        let speedNumbersPointsOne =
+          Math.round((speedNumbersOne / speedNumbersStandards) * 1000 * 100) /
+          100;
+        let speedNumbersPointsTwo =
+          Math.round((speedNumbersTwo / speedNumbersStandards) * 1000 * 100) /
+          100;
         let namesAndFacesPoints =
           Math.round((namesAndFaces / namesAndFacesStandards) * 1000 * 100) /
           100;
@@ -1284,32 +1663,48 @@ function searchCompetitors(value) {
           Math.round((dates / datesStandards) * 1000 * 100) / 100;
         let longCardsPoints =
           Math.round((longCards / longCardsStandards) * 1000 * 100) / 100;
-        let spokenPoints =
-          Math.round(Math.sqrt(spoken) * spokenStandards * 100) / 100;
-        let speedCardsPoints = () => {
-          if (speedCardsTime < 300 && speedCardsScore == 52) {
+        let spokenPointsOne =
+          Math.round(Math.sqrt(spokenOne) * spokenStandards * 100) / 100;
+        let spokenPointsTwo =
+          Math.round(Math.sqrt(spokenTwo) * spokenStandards * 100) / 100;
+        let spokenPointsThree =
+          Math.round(Math.sqrt(spokenThree) * spokenStandards * 100) / 100;
+
+        let speedCardsPointsOne = () => {
+          if (speedCardsTimeOne < 300 && speedCardsScoreOne == 52) {
             return (
-              Math.round((6862 / Math.pow(speedCardsTime, 0.75)) * 100) / 100
+              Math.round((6862 / Math.pow(speedCardsTimeOne, 0.75)) * 100) / 100
             );
-          } else if (speedCardsScore <= 52 && speedCardsTime == 300) {
-            return (scPoints.value =
-              Math.round((speedCardsScore / 52) * 95.6 * 100) / 100);
-          } else if (speedCardsScore <= 52 && speedCardsTime != 300) {
-            return (scPoints.value =
-              Math.round((speedCardsScore / 52) * 95.6 * 100) / 100);
+          } else if (speedCardsScoreOne <= 52 && speedCardsTimeOne == 300) {
+            return Math.round((speedCardsScoreOne / 52) * 95.6 * 100) / 100;
+          } else if (speedCardsScoreOne <= 52 && speedCardsTimeOne != 300) {
+            return Math.round((speedCardsScoreOne / 52) * 95.6 * 100) / 100;
           }
         };
+
+        let speedCardsPointsTwo = () => {
+          if (speedCardsTimeTwo < 300 && speedCardsScoreTwo == 52) {
+            return (
+              Math.round((6862 / Math.pow(speedCardsTimeTwo, 0.75)) * 100) / 100
+            );
+          } else if (speedCardsScoreTwo <= 52 && speedCardsTimeTwo == 300) {
+            return Math.round((speedCardsScoreTwo / 52) * 95.6 * 100) / 100;
+          } else if (speedCardsScoreTwo <= 52 && speedCardsTimeTwo != 300) {
+            return Math.round((speedCardsScoreTwo / 52) * 95.6 * 100) / 100;
+          }
+        };
+
         let overallPoints =
           imagesPoints +
           binaryPoints +
           longNumbersPoints +
-          speedNumbersPoints +
+          Math.max(speedNumbersPointsOne, speedNumbersPointsTwo) +
           namesAndFacesPoints +
           wordsPoints +
           datesPoints +
           longCardsPoints +
-          spokenPoints +
-          speedCardsPoints();
+          Math.max(spokenPointsOne, spokenPointsTwo, spokenPointsThree) +
+          Math.max(speedCardsPointsOne(), speedCardsPointsTwo());
 
         overallPoints = Math.round(overallPoints * 100) / 100;
 
@@ -1335,8 +1730,10 @@ function searchCompetitors(value) {
               <td>${imagesPoints}</td>
               <td>${binary || ""}</td>
               <td>${binaryPoints}</td>
-              <td>${speedNumbers || ""}</td>
-              <td>${speedNumbersPoints}</td>
+              <td>${speedNumbersOne || ""}</td>
+              <td>${speedNumbersPointsOne}</td>
+              <td>${speedNumbersTwo || ""}</td>
+              <td>${speedNumbersPointsTwo}</td>
               <td>${longNumbers || ""}</td>
               <td>${longNumbersPoints}</td>
               <td>${namesAndFaces || ""}</td>
@@ -1347,11 +1744,18 @@ function searchCompetitors(value) {
               <td>${wordsPoints}</td>
               <td>${longCards || ""}</td>
               <td>${longCardsPoints}</td>
-              <td>${spoken || ""}</td>
-              <td>${spokenPoints}</td>
-              <td>${speedCardsScore || ""}</td>
-              <td>${speedCardsTime || ""}</td>
-              <td>${speedCardsPoints()}</td>
+              <td>${spokenOne || ""}</td>
+              <td>${spokenPointsOne}</td>
+              <td>${spokenTwo || ""}</td>
+              <td>${spokenPointsTwo}</td>
+              <td>${spokenThree || ""}</td>
+              <td>${spokenPointsThree}</td>
+              <td>${speedCardsScoreOne || ""}</td>
+              <td>${speedCardsTimeOne || ""}</td>
+              <td>${speedCardsPointsOne()}</td>
+              <td>${speedCardsScoreTwo || ""}</td>
+              <td>${speedCardsTimeTwo || ""}</td>
+              <td>${speedCardsPointsTwo()}</td>
               <td class="total">${overallPoints}</td>
               <td class="Rank"></td>
               ${
@@ -1371,7 +1775,10 @@ function searchCompetitors(value) {
     }
   } else {
     for (let i = 0; i < competitorData.length; i++) {
-      if (competitorData[i].IAMID.toString().includes(value)) {
+      if (
+        competitorData[i].IAMID &&
+        competitorData[i].IAMID.toString().includes(value)
+      ) {
         const {
           completed,
           _id: taskID,
@@ -1382,14 +1789,19 @@ function searchCompetitors(value) {
           images,
           binary,
           longNumbers,
-          speedNumbers,
+          speedNumbersOne,
+          speedNumbersTwo,
           namesAndFaces,
           words,
           longCards,
           dates,
-          spoken,
-          speedCardsScore,
-          speedCardsTime,
+          spokenOne,
+          spokenTwo,
+          spokenThree,
+          speedCardsScoreOne,
+          speedCardsTimeOne,
+          speedCardsScoreTwo,
+          speedCardsTimeTwo,
         } = competitorData[i];
 
         let imagesPoints =
@@ -1398,8 +1810,12 @@ function searchCompetitors(value) {
           Math.round((binary / binaryStandards) * 1000 * 100) / 100;
         let longNumbersPoints =
           Math.round((longNumbers / longNumbersStandards) * 1000 * 100) / 100;
-        let speedNumbersPoints =
-          Math.round((speedNumbers / speedNumbersStandards) * 1000 * 100) / 100;
+        let speedNumbersPointsOne =
+          Math.round((speedNumbersOne / speedNumbersStandards) * 1000 * 100) /
+          100;
+        let speedNumbersPointsTwo =
+          Math.round((speedNumbersTwo / speedNumbersStandards) * 1000 * 100) /
+          100;
         let namesAndFacesPoints =
           Math.round((namesAndFaces / namesAndFacesStandards) * 1000 * 100) /
           100;
@@ -1409,89 +1825,114 @@ function searchCompetitors(value) {
           Math.round((dates / datesStandards) * 1000 * 100) / 100;
         let longCardsPoints =
           Math.round((longCards / longCardsStandards) * 1000 * 100) / 100;
-        let spokenPoints =
-          Math.round(Math.sqrt(spoken) * spokenStandards * 100) / 100;
-        let speedCardsPoints = () => {
-          if (speedCardsTime < 300 && speedCardsScore == 52) {
+        let spokenPointsOne =
+          Math.round(Math.sqrt(spokenOne) * spokenStandards * 100) / 100;
+        let spokenPointsTwo =
+          Math.round(Math.sqrt(spokenTwo) * spokenStandards * 100) / 100;
+        let spokenPointsThree =
+          Math.round(Math.sqrt(spokenThree) * spokenStandards * 100) / 100;
+
+        let speedCardsPointsOne = () => {
+          if (speedCardsTimeOne < 300 && speedCardsScoreOne == 52) {
             return (
-              Math.round((6862 / Math.pow(speedCardsTime, 0.75)) * 100) / 100
+              Math.round((6862 / Math.pow(speedCardsTimeOne, 0.75)) * 100) / 100
             );
-          } else if (speedCardsScore <= 52 && speedCardsTime == 300) {
-            return (scPoints.value =
-              Math.round((speedCardsScore / 52) * 95.6 * 100) / 100);
-          } else if (speedCardsScore <= 52 && speedCardsTime != 300) {
-            return (scPoints.value =
-              Math.round((speedCardsScore / 52) * 95.6 * 100) / 100);
+          } else if (speedCardsScoreOne <= 52 && speedCardsTimeOne == 300) {
+            return Math.round((speedCardsScoreOne / 52) * 95.6 * 100) / 100;
+          } else if (speedCardsScoreOne <= 52 && speedCardsTimeOne != 300) {
+            return Math.round((speedCardsScoreOne / 52) * 95.6 * 100) / 100;
           }
         };
+
+        let speedCardsPointsTwo = () => {
+          if (speedCardsTimeTwo < 300 && speedCardsScoreTwo == 52) {
+            return (
+              Math.round((6862 / Math.pow(speedCardsTimeTwo, 0.75)) * 100) / 100
+            );
+          } else if (speedCardsScoreTwo <= 52 && speedCardsTimeTwo == 300) {
+            return Math.round((speedCardsScoreTwo / 52) * 95.6 * 100) / 100;
+          } else if (speedCardsScoreTwo <= 52 && speedCardsTimeTwo != 300) {
+            return Math.round((speedCardsScoreTwo / 52) * 95.6 * 100) / 100;
+          }
+        };
+
         let overallPoints =
           imagesPoints +
           binaryPoints +
           longNumbersPoints +
-          speedNumbersPoints +
+          Math.max(speedNumbersPointsOne, speedNumbersPointsTwo) +
           namesAndFacesPoints +
           wordsPoints +
           datesPoints +
           longCardsPoints +
-          spokenPoints +
-          speedCardsPoints();
+          Math.max(spokenPointsOne, spokenPointsTwo, spokenPointsThree) +
+          Math.max(speedCardsPointsOne(), speedCardsPointsTwo());
 
         overallPoints = Math.round(overallPoints * 100) / 100;
 
         table += `
-          <tr> 
-                  ${
-                    loggedIn
-                      ? `
-                  <td>
-                    <a href="task.html?id=${taskID}"  class="edit-link">
-                    <i class="fas fa-edit"></i>
-                    </a>
-                  </td>
-                  `
-                      : ""
-                  }
-                  
-                  <td id="nameWidth">${name}</td>
-                  <td>${country || ""}</td>
-                  <td>${category || ""}</td>
-                  <td>${IAMID || ""}</td>
-                  <td>${images || ""}</td>
-                  <td>${imagesPoints}</td>
-                  <td>${binary || ""}</td>
-                  <td>${binaryPoints}</td>
-                  <td>${speedNumbers || ""}</td>
-                  <td>${speedNumbersPoints}</td>
-                  <td>${longNumbers || ""}</td>
-                  <td>${longNumbersPoints}</td>
-                  <td>${namesAndFaces || ""}</td>
-                  <td>${namesAndFacesPoints}</td>
-                  <td>${dates || ""}</td>
-                  <td>${datesPoints}</td>
-                  <td>${words || ""}</td>
-                  <td>${wordsPoints}</td>
-                  <td>${longCards || ""}</td>
-                  <td>${longCardsPoints}</td>
-                  <td>${spoken || ""}</td>
-                  <td>${spokenPoints}</td>
-                  <td>${speedCardsScore || ""}</td>
-                  <td>${speedCardsTime || ""}</td>
-                  <td>${speedCardsPoints()}</td>
-                  <td class="total">${overallPoints}</td>
-                  <td class="Rank"></td>
-                  ${
-                    loggedIn
-                      ? `
-                  <td>
-                    <button type="button" class="delete-btn" data-id="${taskID}" data-name="${name}">
-                    <i class="fas fa-trash"></i>
-                    </button>
-                  </td>
-                  `
-                      : ""
-                  }
-              </tr>
-    `;
+      <tr> 
+              ${
+                loggedIn
+                  ? `
+              <td>
+                <a href="task.html?id=${taskID}"  class="edit-link">
+                <i class="fas fa-edit"></i>
+                </a>
+              </td>
+              `
+                  : ""
+              }
+              
+              <td id="nameWidth">${name}</td>
+              <td>${country || ""}</td>
+              <td>${category || ""}</td>
+              <td>${IAMID || ""}</td>
+              <td>${images || ""}</td>
+              <td>${imagesPoints}</td>
+              <td>${binary || ""}</td>
+              <td>${binaryPoints}</td>
+              <td>${speedNumbersOne || ""}</td>
+              <td>${speedNumbersPointsOne}</td>
+              <td>${speedNumbersTwo || ""}</td>
+              <td>${speedNumbersPointsTwo}</td>
+              <td>${longNumbers || ""}</td>
+              <td>${longNumbersPoints}</td>
+              <td>${namesAndFaces || ""}</td>
+              <td>${namesAndFacesPoints}</td>
+              <td>${dates || ""}</td>
+              <td>${datesPoints}</td>
+              <td>${words || ""}</td>
+              <td>${wordsPoints}</td>
+              <td>${longCards || ""}</td>
+              <td>${longCardsPoints}</td>
+              <td>${spokenOne || ""}</td>
+              <td>${spokenPointsOne}</td>
+              <td>${spokenTwo || ""}</td>
+              <td>${spokenPointsTwo}</td>
+              <td>${spokenThree || ""}</td>
+              <td>${spokenPointsThree}</td>
+              <td>${speedCardsScoreOne || ""}</td>
+              <td>${speedCardsTimeOne || ""}</td>
+              <td>${speedCardsPointsOne()}</td>
+              <td>${speedCardsScoreTwo || ""}</td>
+              <td>${speedCardsTimeTwo || ""}</td>
+              <td>${speedCardsPointsTwo()}</td>
+              <td class="total">${overallPoints}</td>
+              <td class="Rank"></td>
+              ${
+                loggedIn
+                  ? `
+              <td>
+                <button type="button" class="delete-btn" data-id="${taskID}" data-name="${name}">
+                <i class="fas fa-trash"></i>
+                </button>
+              </td>
+              `
+                  : ""
+              }
+          </tr>
+`;
       }
     }
   }

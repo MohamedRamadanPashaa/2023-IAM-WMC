@@ -6,6 +6,7 @@
   margin: 0;
   padding: 0;
 }
+
 html {
   scroll-behavior: smooth;
 }
@@ -33,19 +34,22 @@ body {
 ul {
   list-style: none;
 }
+
 input,
 select {
   transition: var(--main-transition);
   border: none;
 }
+
 input:focus,
 select:focus,
 input:hover,
 select:hover {
   box-shadow: 0 0 5px 0px var(--color-four);
   outline: none;
-  transform: scale(1.03);
+  transform: scale(1.01);
 }
+
 input {
   caret-color: var(--color-two);
 }
@@ -57,6 +61,7 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 /* for firefox */
 input[type="number"] {
   -moz-appearance: textfield;
@@ -69,6 +74,7 @@ input[type="number"] {
   margin-left: auto;
   margin-right: auto;
 }
+
 /* small */
 @media (min-width: 768px) {
   .container {
@@ -81,12 +87,14 @@ input[type="number"] {
     width: 970px;
   }
 }
-/* larg */
+
+/* large */
 @media (min-width: 1200px) {
   .container {
     width: 1170px;
   }
 }
+
 @media (min-width: 1600px) {
   .container {
     width: 1570px;
@@ -105,6 +113,7 @@ input[type="number"] {
   border-radius: 2px;
   transition: var(--main-transition);
 }
+
 .admin:hover {
   color: white;
 }
@@ -196,15 +205,21 @@ input[type="number"] {
   padding-bottom: var(--section-padding);
   text-align: center;
 }
+
 .head h1 {
-  color: var(--color-three);
-  font-size: 40px;
-  text-transform: capitalize;
+  color: var(--color-one);
+  font-size: 35px;
+  padding: 10px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  width: 70%;
+  margin: 20px auto;
+  background-color: var(--color-three);
 }
 
 @media (max-width: 767px) {
   .head h1 {
-    font-size: 32px;
+    font-size: 24px;
   }
 }
 
@@ -236,7 +251,6 @@ form .container div select {
   caret-color: var(--color-two);
   transition: var(--main-transition);
 }
-
 /* End Competitors Info */
 
 /* Start Score Calculator */
@@ -267,6 +281,7 @@ form .container div select {
   text-align: center;
   font-size: 22px;
 }
+
 .competitorsData .container div input {
   width: 48%;
   padding: 10px;
@@ -277,11 +292,11 @@ form .container div select {
   text-align: center;
 }
 
-.competitorsData .container div:nth-child(10) input {
+.competitorsData .container .sc-input {
   width: 32%;
 }
 
-.competitorsData .container div:nth-child(11) input {
+.competitorsData .container div:last-child input {
   width: 100%;
 }
 
@@ -309,10 +324,18 @@ form .container div select {
   border-radius: 10px;
   transition: var(--main-transition);
 }
+
 .addCompetitor button:hover,
 #deleteAll button:hover {
   letter-spacing: 2px;
   background-color: #145354;
+}
+
+.addCompetitor button.disabled {
+  cursor: not-allowed;
+  background-color: var(--color-four);
+  pointer-events: none;
+  color: var(--color-one);
 }
 
 #deleteAll {
@@ -568,13 +591,17 @@ button.delete-btn i {
 
 #img-table,
 #bin-table,
-#num5-table,
+#num5-table-one,
+#num5-table-two,
 #wor-table,
 #nam-table,
 #dat-table,
 #car-table,
-#sn-table,
-#sc-table,
+#sn-table-one,
+#sn-table-two,
+#sn-table-three,
+#sc-table-one,
+#sc-table-two,
 #num15-table {
   display: none;
 }
@@ -590,7 +617,7 @@ button.delete-btn i {
   border-radius: 5px;
   display: block;
   margin: 20px auto;
-  width: 300px;
+  width: 350px;
   font-size: 28px;
   text-transform: capitalize;
   transition: var(--main-transition);
@@ -599,7 +626,6 @@ button.delete-btn i {
 
 .back-link:hover {
   letter-spacing: 1px;
-  background-color: #145354;
 }
 
 /* End Tasks */

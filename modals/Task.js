@@ -6,7 +6,7 @@ const TaskSchema = new mongoose.Schema({
     unique: [true, "This is repeated Name"],
     required: [true, "must provide a name"],
     trim: true,
-    maxlength: [20, "name can not be more than 20 charachters"],
+    // maxlength: [20, "name can not be more than 20 charachters"],
   },
   completed: {
     type: Boolean,
@@ -32,7 +32,10 @@ const TaskSchema = new mongoose.Schema({
   longNumbers: {
     type: Number,
   },
-  speedNumbers: {
+  speedNumbersOne: {
+    type: Number,
+  },
+  speedNumbersTwo: {
     type: Number,
   },
   namesAndFaces: {
@@ -47,13 +50,25 @@ const TaskSchema = new mongoose.Schema({
   dates: {
     type: Number,
   },
-  spoken: {
+  spokenOne: {
     type: Number,
   },
-  speedCardsScore: {
+  spokenTwo: {
     type: Number,
   },
-  speedCardsTime: {
+  spokenThree: {
+    type: Number,
+  },
+  speedCardsScoreOne: {
+    type: Number,
+  },
+  speedCardsTimeOne: {
+    type: Number,
+  },
+  speedCardsScoreTwo: {
+    type: Number,
+  },
+  speedCardsTimeTwo: {
     type: Number,
   },
 });
