@@ -22,6 +22,10 @@ const TaskSchema = new mongoose.Schema({
   category: {
     type: String,
     required: [true, "Must provide a category"],
+    default: "Unknown",
+  },
+  birth: {
+    type: Date,
   },
   images: {
     type: Number,

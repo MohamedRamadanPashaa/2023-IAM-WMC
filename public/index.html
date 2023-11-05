@@ -7,7 +7,7 @@
     <!-- favicon -->
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
 
-    <!-- font awesome -->
+    <!-- font awesome display -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
@@ -328,6 +328,7 @@
             <option value="Kids">Kids</option>
             <option value="Juniors">Juniors</option>
             <option value="Adults">Adults</option>
+            <option value="Seniors">Seniors</option>
           </select>
         </div>
         <div>
@@ -514,14 +515,14 @@
         <div>
           <p>Speed Cards (1)</p>
           <input
-            onkeyup="getscPointsOne()"
+            onkeyup="getScPointsOne()"
             type="number"
             id="scScoreOne"
             placeholder="Score"
             class="score-input sc-input"
           />
           <input
-            onkeyup="getscPointsOne()"
+            onkeyup="getScPointsOne()"
             type="number"
             id="scTimeOne"
             placeholder="Time"
@@ -538,14 +539,14 @@
         <div>
           <p>Speed Cards (2)</p>
           <input
-            onkeyup="getscPointsTwo()"
+            onkeyup="getScPointsTwo()"
             type="number"
             id="scScoreTwo"
             placeholder="Score"
             class="score-input sc-input"
           />
           <input
-            onkeyup="getscPointsTwo()"
+            onkeyup="getScPointsTwo()"
             type="number"
             id="scTimeTwo"
             placeholder="Time"
@@ -624,57 +625,59 @@
         <a
           href="#oTable"
           id="overall-btn"
-          onclick="displyOverallTable()"
+          onclick="displayOverallTable()"
           class="active"
           >Overall</a
         >
-        <a href="#img-table" id="img-btn" onclick="displyImageTable()"
+        <a href="#img-table" id="img-btn" onclick="displayImageTable()"
           >5-Images</a
         >
-        <a href="#bin-table" id="bin-btn" onclick="displyBinaryTable()"
+        <a href="#bin-table" id="bin-btn" onclick="displayBinaryTable()"
           >30-Binary</a
         >
         <a
           href="#num5-table-one"
           id="num5-btn-one"
-          onclick="displyNumbers5TableOne()"
+          onclick="displayNumbers5TableOne()"
           >5-Numbers (1)</a
         >
         <a
           href="#num5-table-two"
           id="num5-btn-two"
-          onclick="displyNumbers5TableTwo()"
+          onclick="displayNumbers5TableTwo()"
           >5-Numbers (2)</a
         >
-        <a href="#wor-table" id="wor-btn" onclick="displyWordsTable()"
+        <a href="#wor-table" id="wor-btn" onclick="displayWordsTable()"
           >15-Words</a
         >
-        <a href="#num15-table" id="num15-btn" onclick="displyNumbers15Table()"
+        <a href="#num15-table" id="num15-btn" onclick="displayNumbers15Table()"
           >60-Numbers</a
         >
-        <a href="#nam-table" id="nam-btn" onclick="displyNamesTable()"
+        <a href="#nam-table" id="nam-btn" onclick="displayNamesTable()"
           >15-N&F</a
         >
-        <a href="#dat-table" id="dat-btn" onclick="displyDatesTable()">Dates</a>
-        <a href="#car-table" id="car-btn" onclick="displyCardsTable()"
+        <a href="#dat-table" id="dat-btn" onclick="displayDatesTable()"
+          >Dates</a
+        >
+        <a href="#car-table" id="car-btn" onclick="displayCardsTable()"
           >60-Cards</a
         >
-        <a href="#sn-table-one" id="sn-btn-one" onclick="displySNTableOne()"
+        <a href="#sn-table-one" id="sn-btn-one" onclick="displaySNTableOne()"
           >Spoken (1)</a
         >
-        <a href="#sn-table-two" id="sn-btn-two" onclick="displySNTableTwo()"
+        <a href="#sn-table-two" id="sn-btn-two" onclick="displaySNTableTwo()"
           >Spoken (2)</a
         >
         <a
           href="#sn-table-three"
           id="sn-btn-three"
-          onclick="displySNTableThree()"
+          onclick="displaySNTableThree()"
           >Spoken (3)</a
         >
-        <a href="#sc-table-one" id="sc-btn-one" onclick="displySCTableOne()"
+        <a href="#sc-table-one" id="sc-btn-one" onclick="displaySCTableOne()"
           >Speed Cards (1)</a
         >
-        <a href="#sc-table-two" id="sc-btn-two" onclick="displySCTableTwo()"
+        <a href="#sc-table-two" id="sc-btn-two" onclick="displaySCTableTwo()"
           >Speed Cards (2)</a
         >
         <a
@@ -697,7 +700,7 @@
           <button id="sort" onclick="sortTable()">Overall Sort</button>
           <button id="sort" onclick="sortCountryTable()">Country Sort</button>
           <button id="sort" onclick="sortCategoryTable()">Category Sort</button>
-          <button id="sort" onclick="sortAlphabitTable()">
+          <button id="sort" onclick="sortAlphabetTable()">
             Alphabetical Sort</button
           ><br />
         </div>
@@ -706,6 +709,7 @@
             <thead>
               <tr>
                 <th rowspan="2" class="editcol">Edit</th>
+                <th rowspan="2" class="editcol">Rank</th>
                 <th class="name" rowspan="2">Names</th>
                 <th class="country" rowspan="2">Country</th>
                 <th class="category" rowspan="2">Category</th>
@@ -725,7 +729,6 @@
                 <th class="sc" colspan="3">Speed Cards (1)</th>
                 <th class="sc" colspan="3">Speed Cards (2)</th>
                 <th class="overall" rowspan="2">Overall</th>
-                <th class="update" rowspan="2">Rank</th>
                 <th class="delete deletecol" rowspan="2">Delete</th>
               </tr>
               <tr>
@@ -778,18 +781,18 @@
         <button id="sort" onclick="sortCategoryImgTable()">
           Category Sort
         </button>
-        <button id="sort" onclick="sortAlphabitImgTable()">
+        <button id="sort" onclick="sortAlphabetImgTable()">
           Alphabetical Sort
         </button>
         <div class="tables">
           <table>
             <tr>
+              <th rowspan="3">Rank</th>
               <th rowspan="3">Names</th>
               <th rowspan="3">Country</th>
               <th rowspan="3">Category</th>
               <th rowspan="3">IAM ID</th>
               <th colspan="2">5-Images</th>
-              <th rowspan="3" class="Rank">Rank</th>
             </tr>
             <tr>
               <th>Score</th>
@@ -811,18 +814,18 @@
         <button id="sort" onclick="sortCategoryBinTable()">
           Category Sort
         </button>
-        <button id="sort" onclick="sortAlphabitBinTable()">
+        <button id="sort" onclick="sortAlphabetBinTable()">
           Alphabetical Sort
         </button>
         <div class="tables">
           <table>
             <tr>
+              <th rowspan="3">Rank</th>
               <th rowspan="3">Names</th>
               <th rowspan="3">Country</th>
               <th rowspan="3">Category</th>
               <th rowspan="3">IAM ID</th>
               <th colspan="2">30-Binary</th>
-              <th rowspan="3" class="Rank">Rank</th>
             </tr>
             <tr>
               <th>Score</th>
@@ -846,18 +849,18 @@
         <button id="sort" onclick="sortCategoryNum5TableOne()">
           Category Sort
         </button>
-        <button id="sort" onclick="sortAlphabitNum5TableOne()">
+        <button id="sort" onclick="sortAlphabetNum5TableOne()">
           Alphabetical Sort
         </button>
         <div class="tables">
           <table>
             <tr>
+              <th rowspan="3">Rank</th>
               <th rowspan="3">Names</th>
               <th rowspan="3">Country</th>
               <th rowspan="3">Category</th>
               <th rowspan="3">IAM ID</th>
               <th colspan="2">5-Numbers (1)</th>
-              <th rowspan="3" class="Rank">Rank</th>
             </tr>
             <tr>
               <th>Score</th>
@@ -879,18 +882,18 @@
         <button id="sort" onclick="sortCategoryNum5TableTwo()">
           Category Sort
         </button>
-        <button id="sort" onclick="sortAlphabitNum5TableTwo()">
+        <button id="sort" onclick="sortAlphabetNum5TableTwo()">
           Alphabetical Sort
         </button>
         <div class="tables">
           <table>
             <tr>
+              <th rowspan="3">Rank</th>
               <th rowspan="3">Names</th>
               <th rowspan="3">Country</th>
               <th rowspan="3">Category</th>
               <th rowspan="3">IAM ID</th>
               <th colspan="2">5-Numbers (2)</th>
-              <th rowspan="3" class="Rank">Rank</th>
             </tr>
             <tr>
               <th>Score</th>
@@ -912,18 +915,18 @@
         <button id="sort" onclick="sortCategoryWorTable()">
           Category Sort
         </button>
-        <button id="sort" onclick="sortAlphabitWorTable()">
+        <button id="sort" onclick="sortAlphabetWorTable()">
           Alphabetical Sort
         </button>
         <div class="tables">
           <table>
             <tr>
+              <th rowspan="3">Rank</th>
               <th rowspan="3">Names</th>
               <th rowspan="3">Country</th>
               <th rowspan="3">Category</th>
               <th rowspan="3">IAM ID</th>
               <th colspan="2">15-Words</th>
-              <th rowspan="3" class="Rank">Rank</th>
             </tr>
             <tr>
               <th>Score</th>
@@ -947,18 +950,18 @@
         <button id="sort" onclick="sortCategoryNum15Table()">
           Category Sort
         </button>
-        <button id="sort" onclick="sortAlphabitNum15Table()">
+        <button id="sort" onclick="sortAlphabetNum15Table()">
           Alphabetical Sort
         </button>
         <div class="tables">
           <table>
             <tr>
+              <th rowspan="3">Rank</th>
               <th rowspan="3">Names</th>
               <th rowspan="3">Country</th>
               <th rowspan="3">Category</th>
               <th rowspan="3">IAM ID</th>
               <th colspan="2">60-Numbers</th>
-              <th rowspan="3" class="Rank">Rank</th>
             </tr>
             <tr>
               <th>Score</th>
@@ -980,18 +983,18 @@
         <button id="sort" onclick="sortCategoryNamTable()">
           Category Sort
         </button>
-        <button id="sort" onclick="sortAlphabitNamTable()">
+        <button id="sort" onclick="sortAlphabetNamTable()">
           Alphabetical Sort
         </button>
         <div class="tables">
           <table>
             <tr>
+              <th rowspan="3">Rank</th>
               <th rowspan="3">Names</th>
               <th rowspan="3">Country</th>
               <th rowspan="3">Category</th>
               <th rowspan="3">IAM ID</th>
               <th colspan="2">15-Names & Faces</th>
-              <th rowspan="3" class="Rank">Rank</th>
             </tr>
             <tr>
               <th>Score</th>
@@ -1013,19 +1016,19 @@
         <button id="sort" onclick="sortCategoryDatTable()">
           Category Sort
         </button>
-        <button id="sort" onclick="sortAlphabitDatTable()">
+        <button id="sort" onclick="sortAlphabetDatTable()">
           Alphabetical Sort
         </button>
 
         <div class="tables">
           <table>
             <tr>
+              <th rowspan="3">Rank</th>
               <th rowspan="3">Names</th>
               <th rowspan="3">Country</th>
               <th rowspan="3">Category</th>
               <th rowspan="3">IAM ID</th>
               <th colspan="2">5-Dates</th>
-              <th rowspan="3" class="Rank">Rank</th>
             </tr>
             <tr>
               <th>Score</th>
@@ -1047,19 +1050,19 @@
         <button id="sort" onclick="sortCategoryCarTable()">
           Category Sort
         </button>
-        <button id="sort" onclick="sortAlphabitCarTable()">
+        <button id="sort" onclick="sortAlphabetCarTable()">
           Alphabetical Sort
         </button>
 
         <div class="tables">
           <table>
             <tr>
+              <th rowspan="3">Rank</th>
               <th rowspan="3">Names</th>
               <th rowspan="3">Country</th>
               <th rowspan="3">Category</th>
               <th rowspan="3">IAM ID</th>
               <th colspan="2">60-Cards</th>
-              <th rowspan="3" class="Rank">Rank</th>
             </tr>
             <tr>
               <th>Score</th>
@@ -1083,19 +1086,19 @@
         <button id="sort" onclick="sortCategorySNTableOne()">
           Category Sort
         </button>
-        <button id="sort" onclick="sortAlphabitSNTableOne()">
+        <button id="sort" onclick="sortAlphabetSNTableOne()">
           Alphabetical Sort
         </button>
 
         <div class="tables">
           <table id="snTableHeadOne">
             <tr>
+              <th rowspan="3">Rank</th>
               <th rowspan="3">Names</th>
               <th rowspan="3">Country</th>
               <th rowspan="3">Category</th>
               <th rowspan="3">IAM ID</th>
               <th colspan="2">Spoken Numbers (1)</th>
-              <th rowspan="3" class="Rank">Rank</th>
             </tr>
             <tr>
               <th>Score</th>
@@ -1117,19 +1120,19 @@
         <button id="sort" onclick="sortCategorySNTableTwo()">
           Category Sort
         </button>
-        <button id="sort" onclick="sortAlphabitSNTableTwo()">
+        <button id="sort" onclick="sortAlphabetSNTableTwo()">
           Alphabetical Sort
         </button>
 
         <div class="tables">
           <table id="snTableHeadTwo">
             <tr>
+              <th rowspan="3">Rank</th>
               <th rowspan="3">Names</th>
               <th rowspan="3">Country</th>
               <th rowspan="3">Category</th>
               <th rowspan="3">IAM ID</th>
               <th colspan="2">Spoken Numbers (2)</th>
-              <th rowspan="3" class="Rank">Rank</th>
             </tr>
             <tr>
               <th>Score</th>
@@ -1151,19 +1154,19 @@
         <button id="sort" onclick="sortCategorySNTableThree()">
           Category Sort
         </button>
-        <button id="sort" onclick="sortAlphabitSNTableThree()">
+        <button id="sort" onclick="sortAlphabetSNTableThree()">
           Alphabetical Sort
         </button>
 
         <div class="tables">
           <table id="snTableHeadThree">
             <tr>
+              <th rowspan="3">Rank</th>
               <th rowspan="3">Names</th>
               <th rowspan="3">Country</th>
               <th rowspan="3">Category</th>
               <th rowspan="3">IAM ID</th>
               <th colspan="2">Spoken Numbers (3)</th>
-              <th rowspan="3" class="Rank">Rank</th>
             </tr>
             <tr>
               <th>Score</th>
@@ -1187,19 +1190,19 @@
         <button id="sort" onclick="sortCategorySCTableOne()">
           Category Sort
         </button>
-        <button id="sort" onclick="sortAlphabitSCTableOne()">
+        <button id="sort" onclick="sortAlphabetSCTableOne()">
           Alphabetical Sort
         </button>
 
         <div class="tables">
           <table id="scTableHeadOne">
             <tr>
+              <th rowspan="3">Rank</th>
               <th rowspan="3">Names</th>
               <th rowspan="3">Country</th>
               <th rowspan="3">Category</th>
               <th rowspan="3">IAM ID</th>
               <th colspan="3">Speed Cards (1)</th>
-              <th rowspan="3" class="Rank">Rank</th>
             </tr>
             <tr>
               <th>Score</th>
@@ -1222,19 +1225,19 @@
         <button id="sort" onclick="sortCategorySCTableTwo()">
           Category Sort
         </button>
-        <button id="sort" onclick="sortAlphabitSCTableTwo()">
+        <button id="sort" onclick="sortAlphabetSCTableTwo()">
           Alphabetical Sort
         </button>
 
         <div class="tables">
           <table id="scTableHeadTwo">
             <tr>
+              <th rowspan="3">Rank</th>
               <th rowspan="3">Names</th>
               <th rowspan="3">Country</th>
               <th rowspan="3">Category</th>
               <th rowspan="3">IAM ID</th>
               <th colspan="3">Speed Cards (2)</th>
-              <th rowspan="3" class="Rank">Rank</th>
             </tr>
             <tr>
               <th>Score</th>

@@ -121,121 +121,109 @@ document.addEventListener("contextmenu", (event) => event.preventDefault());
 
 // Calculate Points
 // get images pts
+const calcPoints = (score, standard) =>
+  Math.round((score / standard) * 1000 * 100) / 100;
+
 getTotalPoints();
-images5Score.onkeyup = function () {
-  images5Points.value =
-    Math.round((images5Score.value / imagesStandards) * 1000 * 100) / 100;
+images5Score.onkeyup = () => {
+  images5Points.value = calcPoints(images5Score.value, imagesStandards);
   getTotalPoints();
 };
 
 // get binary pts
-binary5Score.onkeyup = function () {
-  binary5Points.value =
-    Math.round((binary5Score.value / binaryStandards) * 1000 * 100) / 100;
+binary5Score.onkeyup = () => {
+  binary5Points.value = calcPoints(binary5Score.value, binaryStandards);
   getTotalPoints();
 };
 
 // get 5-Min Numbers pts
-number5ScoreOne.onkeyup = function () {
-  number5PointsOne.value =
-    Math.round((number5ScoreOne.value / speedNumbersStandards) * 1000 * 100) /
-    100;
+number5ScoreOne.onkeyup = () => {
+  number5PointsOne.value = calcPoints(
+    number5ScoreOne.value,
+    speedNumbersStandards
+  );
   getTotalPoints();
 };
 
-number5ScoreTwo.onkeyup = function () {
-  number5PointsTwo.value =
-    Math.round((number5ScoreTwo.value / speedNumbersStandards) * 1000 * 100) /
-    100;
+number5ScoreTwo.onkeyup = () => {
+  number5PointsTwo.value = calcPoints(
+    number5ScoreTwo.value,
+    speedNumbersStandards
+  );
   getTotalPoints();
 };
 
 // get 15-Min Numbers pts
-number15Score.onkeyup = function () {
-  number15Points.value =
-    Math.round((number15Score.value / longNumbersStandards) * 1000 * 100) / 100;
+number15Score.onkeyup = () => {
+  number15Points.value = calcPoints(number15Score.value, longNumbersStandards);
+
   getTotalPoints();
 };
 
 // get 5-Min Names&faces pts
-names5Score.onkeyup = function () {
-  names5Points.value =
-    Math.round((names5Score.value / namesAndFacesStandards) * 1000 * 100) / 100;
+names5Score.onkeyup = () => {
+  names5Points.value = calcPoints(names5Score.value, namesAndFacesStandards);
   getTotalPoints();
 };
 
 // get 5-Min Dates pts
-dates5Score.onkeyup = function () {
-  dates5Points.value =
-    Math.round((dates5Score.value / datesStandards) * 1000 * 100) / 100;
+dates5Score.onkeyup = () => {
+  dates5Points.value = calcPoints(dates5Score.value, datesStandards);
   getTotalPoints();
 };
 
 // get 5-Min Words pts
-words5Score.onkeyup = function () {
-  words5Points.value =
-    Math.round((words5Score.value / wordsStandards) * 1000 * 100) / 100;
+words5Score.onkeyup = () => {
+  words5Points.value = calcPoints(words5Score.value, wordsStandards);
   getTotalPoints();
 };
 
 // get 10-Min Cards pts
-cards10Score.onkeyup = function () {
-  cards10Points.value =
-    Math.round((cards10Score.value / longCardsStandards) * 1000 * 100) / 100;
+cards10Score.onkeyup = () => {
+  cards10Points.value = calcPoints(cards10Score.value, longCardsStandards);
   getTotalPoints();
 };
 
 // get spoken numbers Cards pts
-snScoreOne.onkeyup = function () {
-  snPointsOne.value =
-    Math.round(Math.sqrt(snScoreOne.value) * spokenStandards * 100) / 100;
+const calcSpokenPoints = (score) =>
+  Math.round(Math.sqrt(score) * spokenStandards * 100) / 100;
+
+snScoreOne.onkeyup = () => {
+  snPointsOne.value = calcSpokenPoints(snScoreOne.value);
   getTotalPoints();
 };
-snScoreTwo.onkeyup = function () {
-  snPointsTwo.value =
-    Math.round(Math.sqrt(snScoreTwo.value) * spokenStandards * 100) / 100;
+snScoreTwo.onkeyup = () => {
+  snPointsTwo.value = calcSpokenPoints(snScoreTwo.value);
   getTotalPoints();
 };
-snScoreThree.onkeyup = function () {
-  snPointsThree.value =
-    Math.round(Math.sqrt(snScoreThree.value) * spokenStandards * 100) / 100;
+snScoreThree.onkeyup = () => {
+  snPointsThree.value = calcSpokenPoints(snScoreThree.value);
   getTotalPoints();
 };
 
 // get Speed Cards pts
-function getscPointsOne() {
-  scScoreOne.innerHTML = 52;
-  if (
-    +scTimeOne.value < 300 &&
-    scTimeOne.value !== "" &&
-    +scScoreOne.value === 52
-  ) {
-    scPointsOne.value =
-      Math.round((6862 / Math.pow(scTimeOne.value, 0.75)) * 100) / 100;
-  } else if (+scScoreOne.value <= 52 && +scTimeOne.value === 300) {
-    scPointsOne.value = Math.round((scScoreOne.value / 52) * 95.6 * 100) / 100;
-  } else if (+scScoreOne.value <= 52 && +scTimeOne.value !== 300) {
-    scPointsOne.value = Math.round((scScoreOne.value / 52) * 95.6 * 100) / 100;
+const getScPoints = (score, time) => {
+  let points;
+  if (+time < 300 && time !== "" && +score === 52) {
+    points = Math.round((6862 / Math.pow(time, 0.75)) * 100) / 100;
+  } else if (+score <= 52 && +time === 300) {
+    points = Math.round((score / 52) * 95.6 * 100) / 100;
+  } else if (+score <= 52 && +time !== 300) {
+    points = Math.round((score / 52) * 95.6 * 100) / 100;
   }
-  getTotalPoints();
-}
 
-function getscPointsTwo() {
-  scScoreTwo.innerHTML = 52;
-  if (
-    +scTimeTwo.value < 300 &&
-    scTimeTwo.value !== "" &&
-    +scScoreTwo.value === 52
-  ) {
-    scPointsTwo.value =
-      Math.round((6862 / Math.pow(scTimeTwo.value, 0.75)) * 100) / 100;
-  } else if (+scScoreTwo.value <= 52 && +scTimeTwo.value === 300) {
-    scPointsTwo.value = Math.round((scScoreTwo.value / 52) * 95.6 * 100) / 100;
-  } else if (+scScoreTwo.value <= 52 && +scTimeTwo.value !== 300) {
-    scPointsTwo.value = Math.round((scScoreTwo.value / 52) * 95.6 * 100) / 100;
-  }
+  return points;
+};
+
+const getScPointsOne = () => {
+  scPointsOne.value = getScPoints(scScoreOne.value, scTimeOne.value);
   getTotalPoints();
-}
+};
+
+const getScPointsTwo = () => {
+  scPointsTwo.value = getScPoints(scScoreTwo.value, scTimeTwo.value);
+  getTotalPoints();
+};
 
 function getTotalPoints() {
   TPoints.value =
@@ -258,9 +246,8 @@ function getTotalPoints() {
   TPoints.style.fontSize = "22px";
 }
 
-let competitorData;
-// Load tasks from /api/tasks
-const showTasks = async () => {
+let competitorData = [];
+const loadData = async () => {
   loadingDOM.style.visibility = "visible";
 
   try {
@@ -268,29 +255,11 @@ const showTasks = async () => {
       data: { tasks },
     } = await axios.get("/api/v1/tasks");
 
-    competitorData = tasks;
-
-    if (tasks.length < 1) {
-      document.getElementById("tbody").innerHTML = `<tr class="empty-list">
-          <td colspan="38">No data to show</td>
-        </tr>`;
-
-      loadingDOM.style.visibility = "hidden";
-      return;
-    }
-
     // Sort the array based on name
-    tasks.sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
+    competitorData = tasks.sort((a, b) => b.name - a.name);
 
-    let table = "";
-    for (let i = 0; i < tasks.length; i++) {
+    for (let i = 0; i < competitorData.length; i++) {
       const {
-        completed,
-        _id: taskID,
-        name,
-        IAMID,
-        country,
-        category,
         images,
         binary,
         longNumbers,
@@ -307,56 +276,38 @@ const showTasks = async () => {
         speedCardsTimeOne,
         speedCardsScoreTwo,
         speedCardsTimeTwo,
-      } = tasks[i];
+      } = competitorData[i];
 
-      let imagesPoints =
-        Math.round((images / imagesStandards) * 1000 * 100) / 100;
-      let binaryPoints =
-        Math.round((binary / binaryStandards) * 1000 * 100) / 100;
-      let longNumbersPoints =
-        Math.round((longNumbers / longNumbersStandards) * 1000 * 100) / 100;
-      let speedNumbersPointsOne =
-        Math.round((speedNumbersOne / speedNumbersStandards) * 1000 * 100) /
-        100;
-      let speedNumbersPointsTwo =
-        Math.round((speedNumbersTwo / speedNumbersStandards) * 1000 * 100) /
-        100;
-      let namesAndFacesPoints =
-        Math.round((namesAndFaces / namesAndFacesStandards) * 1000 * 100) / 100;
-      let wordsPoints = Math.round((words / wordsStandards) * 1000 * 100) / 100;
-      let datesPoints = Math.round((dates / datesStandards) * 1000 * 100) / 100;
-      let longCardsPoints =
-        Math.round((longCards / longCardsStandards) * 1000 * 100) / 100;
-      let spokenPointsOne =
-        Math.round(Math.sqrt(spokenOne) * spokenStandards * 100) / 100;
-      let spokenPointsTwo =
-        Math.round(Math.sqrt(spokenTwo) * spokenStandards * 100) / 100;
-      let spokenPointsThree =
-        Math.round(Math.sqrt(spokenThree) * spokenStandards * 100) / 100;
+      let imagesPoints = calcPoints(images, imagesStandards);
+      let binaryPoints = calcPoints(binary, binaryStandards);
+      let longNumbersPoints = calcPoints(longNumbers, longNumbersStandards);
+      let speedNumbersPointsOne = calcPoints(
+        speedNumbersOne,
+        speedNumbersStandards
+      );
+      let speedNumbersPointsTwo = calcPoints(
+        speedNumbersTwo,
+        speedNumbersStandards
+      );
+      let namesAndFacesPoints = calcPoints(
+        namesAndFaces,
+        namesAndFacesStandards
+      );
+      let wordsPoints = calcPoints(words, wordsStandards);
+      let datesPoints = calcPoints(dates, datesStandards);
+      let longCardsPoints = calcPoints(longCards, longCardsStandards);
+      let spokenPointsOne = calcSpokenPoints(spokenOne);
+      let spokenPointsTwo = calcSpokenPoints(spokenTwo);
+      let spokenPointsThree = calcSpokenPoints(spokenThree);
 
-      let speedCardsPointsOne = () => {
-        if (speedCardsTimeOne < 300 && speedCardsScoreOne == 52) {
-          return (
-            Math.round((6862 / Math.pow(speedCardsTimeOne, 0.75)) * 100) / 100
-          );
-        } else if (speedCardsScoreOne <= 52 && speedCardsTimeOne == 300) {
-          return Math.round((speedCardsScoreOne / 52) * 95.6 * 100) / 100;
-        } else if (speedCardsScoreOne <= 52 && speedCardsTimeOne != 300) {
-          return Math.round((speedCardsScoreOne / 52) * 95.6 * 100) / 100;
-        }
-      };
-
-      let speedCardsPointsTwo = () => {
-        if (speedCardsTimeTwo < 300 && speedCardsScoreTwo == 52) {
-          return (
-            Math.round((6862 / Math.pow(speedCardsTimeTwo, 0.75)) * 100) / 100
-          );
-        } else if (speedCardsScoreTwo <= 52 && speedCardsTimeTwo == 300) {
-          return Math.round((speedCardsScoreTwo / 52) * 95.6 * 100) / 100;
-        } else if (speedCardsScoreTwo <= 52 && speedCardsTimeTwo != 300) {
-          return Math.round((speedCardsScoreTwo / 52) * 95.6 * 100) / 100;
-        }
-      };
+      let speedCardsPointsOne = getScPoints(
+        speedCardsScoreOne,
+        speedCardsTimeOne
+      );
+      let speedCardsPointsTwo = getScPoints(
+        speedCardsScoreTwo,
+        speedCardsTimeTwo
+      );
 
       let overallPoints =
         imagesPoints +
@@ -368,11 +319,85 @@ const showTasks = async () => {
         datesPoints +
         longCardsPoints +
         Math.max(spokenPointsOne, spokenPointsTwo, spokenPointsThree) +
-        Math.max(speedCardsPointsOne(), speedCardsPointsTwo());
+        Math.max(speedCardsPointsOne, speedCardsPointsTwo);
 
       overallPoints = Math.round(overallPoints * 100) / 100;
 
-      table += `
+      competitorData[i].overall = overallPoints;
+    }
+  } catch (error) {
+    document.getElementById("tbody").innerHTML =
+      '<tr class="empty-list"><td colspan="38">There was an error, please try again later....</td></tr>';
+  }
+
+  loadingDOM.style.visibility = "hidden";
+  ranking("overall");
+  showTasks();
+};
+loadData();
+
+// Load tasks from /api/tasks
+const showTasks = () => {
+  if (competitorData.length === 0) {
+    document.getElementById("tbody").innerHTML = `
+        <tr class="empty-list">
+          <td colspan="38">No data to show</td>
+        </tr>`;
+
+    return;
+  }
+
+  let table = "";
+  for (let i = 0; i < competitorData.length; i++) {
+    const {
+      completed,
+      _id: taskID,
+      name,
+      IAMID,
+      country,
+      category,
+      images,
+      binary,
+      longNumbers,
+      speedNumbersOne,
+      speedNumbersTwo,
+      namesAndFaces,
+      words,
+      longCards,
+      dates,
+      spokenOne,
+      spokenTwo,
+      spokenThree,
+      speedCardsScoreOne,
+      speedCardsTimeOne,
+      speedCardsScoreTwo,
+      speedCardsTimeTwo,
+      overall,
+      rank,
+    } = competitorData[i];
+
+    let imagesPoints = calcPoints(images, imagesStandards) || "";
+    let binaryPoints = calcPoints(binary, binaryStandards) || "";
+    let longNumbersPoints = calcPoints(longNumbers, longNumbersStandards) || "";
+    let speedNumbersPointsOne =
+      calcPoints(speedNumbersOne, speedNumbersStandards) || "";
+    let speedNumbersPointsTwo =
+      calcPoints(speedNumbersTwo, speedNumbersStandards) || "";
+    let namesAndFacesPoints =
+      calcPoints(namesAndFaces, namesAndFacesStandards) || "";
+    let wordsPoints = calcPoints(words, wordsStandards) || "";
+    let datesPoints = calcPoints(dates, datesStandards) || "";
+    let longCardsPoints = calcPoints(longCards, longCardsStandards) || "";
+    let spokenPointsOne = calcSpokenPoints(spokenOne) || "";
+    let spokenPointsTwo = calcSpokenPoints(spokenTwo) || "";
+    let spokenPointsThree = calcSpokenPoints(spokenThree) || "";
+
+    let speedCardsPointsOne =
+      getScPoints(speedCardsScoreOne, speedCardsTimeOne) || "";
+    let speedCardsPointsTwo =
+      getScPoints(speedCardsScoreTwo, speedCardsTimeTwo) || "";
+
+    table += `
       <tr> 
               ${
                 loggedIn
@@ -386,6 +411,7 @@ const showTasks = async () => {
                   : ""
               }
               
+              <td>${rank}</td>
               <td id="nameWidth">${name}</td>
               <td>${country || ""}</td>
               <td>${category || ""}</td>
@@ -412,16 +438,15 @@ const showTasks = async () => {
               <td>${spokenPointsOne}</td>
               <td>${spokenTwo || ""}</td>
               <td>${spokenPointsTwo}</td>
-              <td>${spokenOne || ""}</td>
-              <td>${spokenPointsTwo}</td>
+              <td>${spokenThree || ""}</td>
+              <td>${spokenPointsThree}</td>
               <td>${speedCardsScoreOne || ""}</td>
               <td>${speedCardsTimeOne || ""}</td>
-              <td>${speedCardsPointsOne()}</td>
+              <td>${speedCardsPointsOne}</td>
               <td>${speedCardsScoreTwo || ""}</td>
               <td>${speedCardsTimeTwo || ""}</td>
-              <td>${speedCardsPointsTwo()}</td>
-              <td class="total">${overallPoints}</td>
-              <td class="Rank"></td>
+              <td>${speedCardsPointsTwo}</td>
+              <td class="total">${overall}</td>
               ${
                 loggedIn
                   ? `
@@ -435,48 +460,10 @@ const showTasks = async () => {
               }
           </tr>
 `;
-    }
-
-    document.getElementById("tbody").innerHTML = table;
-    rankTotal();
-    showImageTable();
-    showBinaryTable();
-    showNumber5TableOne();
-    showNumber5TableTwo();
-    showWordsTable();
-    showNumbers15Table();
-    showNamesTable();
-    showDatesTable();
-    showCardsTable();
-    showSNTableOne();
-    showSNTableTwo();
-    showSNTableThree();
-    showSCTableOne();
-    showSCTableTwo();
-    sortTable();
-    rankTotal();
-    rankBin();
-    rankImg();
-    rankNum5One();
-    rankNum5Two();
-    rankNum15();
-    rankWor();
-    rankNam();
-    rankDat();
-    rankCar();
-    rankSNOne();
-    rankSNTwo();
-    rankSNThree();
-    rankSCOne();
-    rankSCTwo();
-  } catch (error) {
-    document.getElementById("tbody").innerHTML =
-      '<tr class="empty-list"><td colspan="38">There was an error, please try again later....</td></tr>';
   }
 
-  loadingDOM.style.visibility = "hidden";
+  document.getElementById("tbody").innerHTML = table;
 };
-showTasks();
 
 // for prev next btn in pagination
 let allPaginationBtn = document.querySelectorAll(".container a");
@@ -520,67 +507,80 @@ function displayOneTable(tableId, btnId) {
   document.getElementById(btnId).classList.add("active");
 }
 
-function displyOverallTable() {
+function displayOverallTable() {
   displayOneTable("overall-table", "overall-btn");
   sortTable();
-  rankTotal();
 }
 
-function displyImageTable() {
+function displayImageTable() {
   displayOneTable("img-table", "img-btn");
   sortImgTable();
+  showImageTable();
 }
-function displyBinaryTable() {
+function displayBinaryTable() {
   displayOneTable("bin-table", "bin-btn");
   sortBinTable();
+  showBinaryTable();
 }
-function displyNumbers5TableOne() {
+function displayNumbers5TableOne() {
   displayOneTable("num5-table-one", "num5-btn-one");
   sortNum5TableOne();
+  showNumber5TableOne();
 }
-function displyNumbers5TableTwo() {
+function displayNumbers5TableTwo() {
   displayOneTable("num5-table-two", "num5-btn-two");
   sortNum5TableTwo();
+  showNumber5TableTwo();
 }
-function displyWordsTable() {
+function displayWordsTable() {
   displayOneTable("wor-table", "wor-btn");
   sortWorTable();
+  showWordsTable();
 }
-function displyNumbers15Table() {
+function displayNumbers15Table() {
   displayOneTable("num15-table", "num15-btn");
   sortNum15Table();
+  showNumbers15Table();
 }
-function displyNamesTable() {
+function displayNamesTable() {
   displayOneTable("nam-table", "nam-btn");
   sortNamTable();
+  showNamesTable();
 }
-function displyDatesTable() {
+function displayDatesTable() {
   displayOneTable("dat-table", "dat-btn");
   sortDatTable();
+  showDatesTable();
 }
-function displyCardsTable() {
+function displayCardsTable() {
   displayOneTable("car-table", "car-btn");
   sortCarTable();
+  showCardsTable();
 }
-function displySNTableOne() {
+function displaySNTableOne() {
   displayOneTable("sn-table-one", "sn-btn-one");
   sortSNTableOne();
+  showSNTableOne();
 }
-function displySNTableTwo() {
+function displaySNTableTwo() {
   displayOneTable("sn-table-two", "sn-btn-two");
   sortSNTableTwo();
+  showSNTableTwo();
 }
-function displySNTableThree() {
+function displaySNTableThree() {
   displayOneTable("sn-table-three", "sn-btn-three");
   sortSNTableThree();
+  showSNTableThree();
 }
-function displySCTableOne() {
+function displaySCTableOne() {
   displayOneTable("sc-table-one", "sc-btn-one");
   sortSCTableOne();
+  showSCTableOne();
 }
-function displySCTableTwo() {
+function displaySCTableTwo() {
   displayOneTable("sc-table-two", "sc-btn-two");
   sortSCTableTwo();
+  showSCTableTwo();
 }
 
 // enter to go to next field
@@ -596,337 +596,104 @@ for (var i = 0; i < allField.length; i++) {
   });
 }
 
-function rankImg() {
-  rankOneTable(".imgRank");
-}
-rankImg();
-
 function showImageTable() {
-  let imgtable = "";
-  for (let i = 0; i < competitorData.length; i++)
-    imgtable += `
-        <tr>
-            <td id="nameWidth">${competitorData[i].name}</td>
-            <td>${competitorData[i].country}</td>
-            <td>${competitorData[i].category}</td>
-            <td>${competitorData[i].IAMID || ""}</td>
-            <td>${competitorData[i].images || ""}</td>
-            <td class="imgRank">${
-              Math.round(
-                (competitorData[i].images / imagesStandards) * 1000 * 100
-              ) / 100
-            }</td>
-            <td class="Rank"></td>
-        </tr>
-    `;
-  document.getElementById("imgTable").innerHTML = imgtable;
+  showTable("images", "imgTable", imagesStandards, "imgRank");
 }
-
-function rankBin() {
-  rankOneTable(".binRank");
-}
-rankBin();
 
 function showBinaryTable() {
-  let bintable = "";
-  for (let i = 0; i < competitorData.length; i++)
-    bintable += `
-    <tr>        
-      <td id="nameWidth">${competitorData[i].name}</td>
-      <td>${competitorData[i].country}</td>
-      <td>${competitorData[i].category}</td>
-      <td>${competitorData[i].IAMID || ""}</td>
-      <td>${competitorData[i].binary || ""}</td>
-      <td class="binRank">${
-        Math.round((competitorData[i].binary / binaryStandards) * 1000 * 100) /
-        100
-      }</td>
-      <td class="Rank"></td>
-    </tr>
-    `;
-  document.getElementById("binTable").innerHTML = bintable;
+  showTable("binary", "binTable", binaryStandards, "binRank");
 }
-
-function rankNum5One() {
-  rankOneTable(".num5RankOne");
-}
-rankNum5One();
 
 function showNumber5TableOne() {
-  let num5table = "";
-  for (let i = 0; i < competitorData.length; i++)
-    num5table += `
-    <tr>      
-                <td id="nameWidth">${competitorData[i].name}</td>
-                <td>${competitorData[i].country}</td>
-                <td>${competitorData[i].category}</td>
-                <td>${competitorData[i].IAMID || ""}</td>
-                <td>${competitorData[i].speedNumbersOne || ""}</td>
-                <td class="num5RankOne">${
-                  Math.round(
-                    (competitorData[i].speedNumbersOne /
-                      speedNumbersStandards) *
-                      1000 *
-                      100
-                  ) / 100
-                }</td>
-                <td class="Rank"></td>
-            </tr>
-    `;
-  document.getElementById("num5TableOne").innerHTML = num5table;
+  showTable(
+    "speedNumbersOne",
+    "num5TableOne",
+    speedNumbersStandards,
+    "num5RankOne"
+  );
 }
-
-function rankNum5Two() {
-  rankOneTable(".num5RankTwo");
-}
-rankNum5Two();
 
 function showNumber5TableTwo() {
-  let num5table = "";
-  for (let i = 0; i < competitorData.length; i++)
-    num5table += `
-    <tr>      
-                <td id="nameWidth">${competitorData[i].name}</td>
-                <td>${competitorData[i].country}</td>
-                <td>${competitorData[i].category}</td>
-                <td>${competitorData[i].IAMID || ""}</td>
-                <td>${competitorData[i].speedNumbersTwo || ""}</td>
-                <td class="num5RankTwo">${
-                  Math.round(
-                    (competitorData[i].speedNumbersTwo /
-                      speedNumbersStandards) *
-                      1000 *
-                      100
-                  ) / 100
-                }</td>
-                <td class="Rank"></td>
-            </tr>
-    `;
-  document.getElementById("num5TableTwo").innerHTML = num5table;
+  showTable(
+    "speedNumbersTwo",
+    "num5TableTwo",
+    speedNumbersStandards,
+    "num5RankTwo"
+  );
 }
-
-function rankWor() {
-  rankOneTable(".worRank");
-}
-rankWor();
 
 function showWordsTable() {
-  let wortable = "";
-  for (let i = 0; i < competitorData.length; i++)
-    wortable += `
-    <tr>
-                <td id="nameWidth">${competitorData[i].name}</td>
-                <td>${competitorData[i].country}</td>
-                <td>${competitorData[i].category}</td>
-                <td>${competitorData[i].IAMID || ""}</td>
-                <td>${competitorData[i].words || ""}</td>
-                <td class="worRank">${
-                  Math.round(
-                    (competitorData[i].words / wordsStandards) * 1000 * 100
-                  ) / 100
-                }</td>
-                <td class="Rank"></td>
-            </tr>
-    `;
-  document.getElementById("worTable").innerHTML = wortable;
+  showTable("words", "worTable", wordsStandards, "worRank");
 }
-
-function rankNum15() {
-  rankOneTable(".num15Rank");
-}
-rankNum15();
 
 function showNumbers15Table() {
-  let num15table = "";
-  for (let i = 0; i < competitorData.length; i++)
-    num15table += `
-    <tr>
-                <td id="nameWidth">${competitorData[i].name}</td>
-                <td>${competitorData[i].country}</td>
-                <td>${competitorData[i].category}</td>
-                <td>${competitorData[i].IAMID || ""}</td>
-                <td>${competitorData[i].longNumbers || ""}</td>
-                <td class="num15Rank">${
-                  Math.round(
-                    (competitorData[i].longNumbers / longNumbersStandards) *
-                      1000 *
-                      100
-                  ) / 100
-                }</td>
-                <td class="Rank"></td>
-            </tr>
-    `;
-  document.getElementById("num15Table").innerHTML = num15table;
+  showTable("longNumbers", "num15Table", longNumbersStandards, "num15Rank");
 }
-
-function rankNam() {
-  rankOneTable(".namRank");
-}
-rankNam();
 
 function showNamesTable() {
-  let namtable = "";
-  for (let i = 0; i < competitorData.length; i++)
-    namtable += `
-    <tr>
-                <td id="nameWidth">${competitorData[i].name}</td>
-                <td>${competitorData[i].country}</td>
-                <td>${competitorData[i].category}</td>
-                <td>${competitorData[i].IAMID || ""}</td>
-                <td>${competitorData[i].namesAndFaces || ""}</td>
-                <td class="namRank">${
-                  Math.round(
-                    (competitorData[i].namesAndFaces / namesAndFacesStandards) *
-                      1000 *
-                      100
-                  ) / 100
-                }</td>
-                <td class="Rank"></td>
-            </tr>
-    `;
-  document.getElementById("namTable").innerHTML = namtable;
+  showTable("namesAndFaces", "namTable", namesAndFacesStandards, "namRank");
 }
-
-function rankDat() {
-  rankOneTable(".datRank");
-}
-rankDat();
 
 function showDatesTable() {
-  let dateTable = "";
-  for (let i = 0; i < competitorData.length; i++)
-    dateTable += `
-    <tr>
-                <td id="nameWidth">${competitorData[i].name}</td>
-                <td>${competitorData[i].country}</td>
-                <td>${competitorData[i].category}</td>
-                <td>${competitorData[i].IAMID || ""}</td>
-                <td>${competitorData[i].dates || ""}</td>
-                <td class="datRank">${
-                  Math.round(
-                    (competitorData[i].dates / datesStandards) * 1000 * 100
-                  ) / 100
-                }</td>
-                <td class="Rank"></td>
-            </tr>
-    `;
-  document.getElementById("datTable").innerHTML = dateTable;
+  showTable("dates", "datTable", datesStandards, "datRank");
 }
-
-function rankCar() {
-  rankOneTable(".carRank");
-}
-rankCar();
 
 function showCardsTable() {
-  let cartable = "";
+  showTable("longCards", "carTable", longCardsStandards, "carRank");
+}
+
+function showTable(test, tableId, standard, classRank) {
+  let table = "";
   for (let i = 0; i < competitorData.length; i++)
-    cartable += `
+    table += `
         <tr>
+            <td>${competitorData[i].rank}</td>
             <td id="nameWidth">${competitorData[i].name}</td>
             <td>${competitorData[i].country}</td>
             <td>${competitorData[i].category}</td>
             <td>${competitorData[i].IAMID || ""}</td>
-            <td>${competitorData[i].longCards || ""}</td>
-            <td class="carRank">${
-              Math.round(
-                (competitorData[i].longCards / longCardsStandards) * 1000 * 100
-              ) / 100
-            }</td>
-            <td class="Rank"></td>
+            <td>${competitorData[i][test] || ""}</td>
+            <td class=${classRank}>
+              ${
+                Math.round((competitorData[i][test] / standard) * 1000 * 100) /
+                  100 || ""
+              }
+            </td>
         </tr>
     `;
-  document.getElementById("carTable").innerHTML = cartable;
+  document.getElementById(tableId).innerHTML = table;
 }
-
-function rankSNOne() {
-  rankOneTable(".snRankOne");
-}
-rankSNOne();
 
 function showSNTableOne() {
-  let snTable = "";
-  for (let i = 0; i < competitorData.length; i++)
-    snTable += `
-    <tr>
-                <td id="nameWidth">${competitorData[i].name}</td>
-                <td>${competitorData[i].country}</td>
-                <td>${competitorData[i].category}</td>
-                <td>${competitorData[i].IAMID || ""}</td>
-                <td>${competitorData[i].spokenOne || ""}</td>
-                <td class="snRankOne">${
-                  Math.round(
-                    Math.sqrt(competitorData[i].spokenOne) *
-                      spokenStandards *
-                      100
-                  ) / 100
-                }</td>
-                <td class="Rank"></td>
-            </tr>
-    `;
-  document.getElementById("snTableOne").innerHTML = snTable;
+  showSNTable("spokenOne", "snTableOne", spokenStandards, "snRankOne");
 }
-
-function rankSNTwo() {
-  rankOneTable(".snRankTwo");
-}
-rankSNTwo();
 
 function showSNTableTwo() {
-  let snTable = "";
-  for (let i = 0; i < competitorData.length; i++)
-    snTable += `
-    <tr>
-                <td id="nameWidth">${competitorData[i].name}</td>
-                <td>${competitorData[i].country}</td>
-                <td>${competitorData[i].category}</td>
-                <td>${competitorData[i].IAMID || ""}</td>
-                <td>${competitorData[i].spokenTwo || ""}</td>
-                <td class="snRankTwo">${
-                  Math.round(
-                    Math.sqrt(competitorData[i].spokenTwo) *
-                      spokenStandards *
-                      100
-                  ) / 100
-                }</td>
-                <td class="Rank"></td>
-            </tr>
-    `;
-  document.getElementById("snTableTwo").innerHTML = snTable;
+  showSNTable("spokenTwo", "snTableTwo", spokenStandards, "snRankTwo");
 }
-
-function rankSNThree() {
-  rankOneTable(".snRankThree");
-}
-rankSNThree();
 
 function showSNTableThree() {
+  showSNTable("spokenThree", "snTableThree", spokenStandards, "snRankThree");
+}
+
+function showSNTable(test, tableId, standard, snRank) {
   let snTable = "";
   for (let i = 0; i < competitorData.length; i++)
     snTable += `
     <tr>
+                <td id="nameWidth">${competitorData[i].rank}</td>
                 <td id="nameWidth">${competitorData[i].name}</td>
                 <td>${competitorData[i].country}</td>
                 <td>${competitorData[i].category}</td>
                 <td>${competitorData[i].IAMID || ""}</td>
-                <td>${competitorData[i].spokenThree || ""}</td>
-                <td class="snRankThree">${
-                  Math.round(
-                    Math.sqrt(competitorData[i].spokenThree) *
-                      spokenStandards *
-                      100
-                  ) / 100
-                }</td>
-                <td class="Rank"></td>
+                <td>${competitorData[i][test] || ""}</td>
+                <td class=${snRank}>${
+      Math.round(Math.sqrt(competitorData[i][test]) * standard * 100) / 100
+    }</td>
             </tr>
     `;
-  document.getElementById("snTableThree").innerHTML = snTable;
+  document.getElementById(tableId).innerHTML = snTable;
 }
-
-function rankSCOne() {
-  rankOneTable(".scRankOne");
-}
-rankSCOne();
 
 function showSCTableOne() {
   let scTable = "";
@@ -961,7 +728,8 @@ function showSCTableOne() {
     };
 
     scTable += `
-    <tr>
+            <tr>
+                <td>${competitorData[i].rank}</td>
                 <td id="nameWidth">${competitorData[i].name}</td>
                 <td>${competitorData[i].country}</td>
                 <td>${competitorData[i].category}</td>
@@ -969,17 +737,11 @@ function showSCTableOne() {
                 <td>${competitorData[i].speedCardsScoreOne || ""}</td>
                 <td>${competitorData[i].speedCardsTimeOne || ""}</td>
                 <td class="scRankOne">${speedCardsPoints()}</td>
-                <td class="Rank"></td>
             </tr>
     `;
   }
   document.getElementById("scTableOne").innerHTML = scTable;
 }
-
-function rankSCTwo() {
-  rankOneTable(".scRankTwo");
-}
-rankSCTwo();
 
 function showSCTableTwo() {
   let scTable = "";
@@ -1014,7 +776,8 @@ function showSCTableTwo() {
     };
 
     scTable += `
-    <tr>
+            <tr>
+                <td id="nameWidth">${competitorData[i].rank}</td>
                 <td id="nameWidth">${competitorData[i].name}</td>
                 <td>${competitorData[i].country}</td>
                 <td>${competitorData[i].category}</td>
@@ -1022,7 +785,6 @@ function showSCTableTwo() {
                 <td>${competitorData[i].speedCardsScoreTwo || ""}</td>
                 <td>${competitorData[i].speedCardsTimeTwo || ""}</td>
                 <td class="scRankTwo">${speedCardsPoints()}</td>
-                <td class="Rank"></td>
             </tr>
     `;
   }
@@ -1124,10 +886,9 @@ if (loggedIn) {
       formAlertDOM.style.display = "none";
     }, 3000);
   };
-} else {
 }
 
-// clear after creat
+// clear after create
 function clearData() {
   competitorName.value = "";
   iamId.value = "";
@@ -1164,393 +925,429 @@ function clearData() {
   TPoints.value = "0";
 }
 
-function rankOneTable(valuesClassName) {
-  $(function () {
-    //Get all total values, sort and remove duplicates
-    let totalList = $(valuesClassName)
-      .map(function () {
-        return $(this).text();
-      })
-      .get()
-      .sort(function (a, b) {
-        return a - b;
-      })
-      .reduce(function (a, b) {
-        if (b != a[0]) a.unshift(b);
-        return a;
-      }, []);
+const ranking = (test) => {
+  competitorData.sort((a, b) => b[test] - a[test]);
 
-    //Assign rank
-    totalList.forEach((v, i) => {
-      $(valuesClassName)
-        .filter(function () {
-          return $(this).text() == v;
-        })
-        .next()
-        .text(i + 1);
-    });
-  });
-}
+  let rank = 1;
+  competitorData[0].rank = rank;
 
-// rank
-function rankTotal() {
-  rankOneTable(".total");
-}
-rankTotal();
-
-// sort overall table
-function sortOneTable(tbodyId, colNumber) {
-  var table, rows, switching, i, x, y, shouldSwitch;
-  table = document.getElementById(tbodyId);
-  switching = true;
-  /*Make a loop that will continue until
-    no switching has been done:*/
-  while (switching) {
-    //start by saying: no switching is done:
-    switching = false;
-    rows = table.rows;
-    /*Loop through all table rows (except the
-      first, which contains table headers):*/
-    for (i = 0; i <= rows.length; i++) {
-      //start by saying there should be no switching:
-      shouldSwitch = false;
-      /*Get the two elements you want to compare,
-        one from current row and one from the next:*/
-      x = rows[i]?.getElementsByTagName("td")[colNumber];
-      y = rows[i + 1]?.getElementsByTagName("td")[colNumber];
-      //check if the two rows should switch place:
-      if (Number(x?.innerHTML) < Number(y?.innerHTML)) {
-        //if so, mark as a switch and break the loop:
-        shouldSwitch = true;
-        break;
-      }
-    }
-    if (shouldSwitch) {
-      /*If a switch has been marked, make the switch
-        and mark that a switch has been done:*/
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
+  for (let i = 1; i < competitorData.length; i++) {
+    if (competitorData[i][test] === competitorData[i - 1][test]) {
+      // If the score is the same as the previous element, share the same rank
+      competitorData[i].rank = rank;
+    } else {
+      // If the score is different, increment the rank
+      rank = i + 1;
+      competitorData[i].rank = rank;
     }
   }
-}
+};
 
-function sortOneTableString(tbodyId, coloNumber) {
-  sortTable();
-  var table, rows, switching, i, x, y, shouldSwitch;
-  table = document.getElementById(tbodyId);
-  switching = true;
-  /*Make a loop that will continue until
-      no switching has been done:*/
-  while (switching) {
-    //start by saying: no switching is done:
-    switching = false;
-    rows = table.rows;
-    /*Loop through all table rows (except the
-        first, which contains table headers):*/
-    for (i = 0; i <= rows.length; i++) {
-      //start by saying there should be no switching:
-      shouldSwitch = false;
-      /*Get the two elements you want to compare,
-          one from current row and one from the next:*/
-      x = rows[i]?.getElementsByTagName("TD")[coloNumber];
-      y = rows[i + 1]?.getElementsByTagName("TD")[coloNumber];
-      //check if the two rows should switch place:
-      if (x?.innerHTML > y?.innerHTML) {
-        //if so, mark as a switch and break the loop:
-        shouldSwitch = true;
-        break;
-      }
-    }
-    if (shouldSwitch) {
-      /*If a switch has been marked, make the switch
-          and mark that a switch has been done:*/
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-    }
-  }
-}
+const sorting = (field) => {
+  competitorData.sort((a, b) => b[field] - a[field]);
+};
+
+const sortingString = (field) => {
+  competitorData.sort((a, b) => a[field].localeCompare(b[field]));
+};
 
 function sortTable() {
-  sortOneTable("tbody", loggedIn ? 35 : 36);
+  ranking("overall");
+  sorting("overall");
+  showTasks();
 }
-sortTable();
 
 function sortCountryTable() {
-  sortTable();
-  sortOneTableString("tbody", loggedIn ? 2 : 1);
+  sorting("overall");
+  sortingString("country");
+  showTasks();
 }
 function sortCategoryTable() {
-  sortTable();
-  sortOneTableString("tbody", loggedIn ? 3 : 2);
+  sorting("overall");
+  sortingString("category");
+  showTasks();
 }
-function sortAlphabitTable() {
-  sortTable();
-  sortOneTableString("tbody", loggedIn ? 1 : 0);
+function sortAlphabetTable() {
+  sorting("overall");
+  sortingString("name");
+  showTasks();
 }
 
-// sort one discpline table
+// sort one discipline table
 function sortImgTable() {
-  sortOneTable("imgTable", 5);
+  ranking("images");
+  sorting("images");
+  showImageTable();
 }
+
 function sortCountryImgTable() {
-  sortImgTable();
-  sortOneTableString("imgTable", 1);
+  sorting("images");
+  sortingString("country");
+  showImageTable();
 }
 
 function sortCategoryImgTable() {
-  sortImgTable();
-  sortOneTableString("imgTable", 2);
+  sorting("images");
+  sortingString("category");
+  showImageTable();
 }
-function sortAlphabitImgTable() {
-  sortImgTable();
-  sortOneTableString("imgTable", 0);
+function sortAlphabetImgTable() {
+  sorting("images");
+  sortingString("name");
+  showImageTable();
 }
 
 function sortBinTable() {
-  sortOneTable("binTable", 5);
+  ranking("binary");
+  sorting("binary");
+  showBinaryTable();
 }
 
 function sortCountryBinTable() {
-  sortBinTable();
-  sortOneTableString("binTable", 1);
+  sorting("binary");
+  sortingString("country");
+  showBinaryTable();
 }
 
 function sortCategoryBinTable() {
-  sortBinTable();
-  sortOneTableString("binTable", 2);
+  sorting("binary");
+  sortingString("category");
+  showBinaryTable();
 }
 
-function sortAlphabitBinTable() {
-  sortBinTable();
-  sortOneTableString("binTable", 0);
+function sortAlphabetBinTable() {
+  sorting("binary");
+  sortingString("name");
+  showBinaryTable();
 }
 
 function sortNum5TableOne() {
-  sortOneTable("num5TableOne", 5);
+  ranking("speedNumbersOne");
+  sorting("speedNumbersOne");
+  showNumber5TableOne();
 }
 
 function sortCountryNum5TableOne() {
-  sortNum5TableOne();
-  sortOneTableString("num5TableOne", 1);
+  sorting("speedNumbersOne");
+  sortingString("country");
+  showNumber5TableOne();
 }
 
 function sortCategoryNum5TableOne() {
-  sortNum5TableOne();
-  sortOneTableString("num5TableOne", 2);
+  sorting("speedNumbersOne");
+  sortingString("category");
+  showNumber5TableOne();
 }
 
-function sortAlphabitNum5TableOne() {
-  sortNum5TableOne();
-  sortOneTableString("num5TableOne", 0);
+function sortAlphabetNum5TableOne() {
+  sorting("speedNumbersOne");
+  sortingString("name");
+  showNumber5TableOne();
 }
 
 function sortNum5TableTwo() {
-  sortOneTable("num5TableTwo", 5);
+  ranking("speedNumbersTwo");
+  sorting("speedNumbersTwo");
+  showNumber5TableTwo();
 }
 
 function sortCountryNum5TableTwo() {
-  sortNum5TableTwo();
-  sortOneTableString("num5TableTwo", 1);
+  sorting("speedNumbersTwo");
+  sortingString("country");
+  showNumber5TableTwo();
 }
 
 function sortCategoryNum5TableTwo() {
-  sortNum5TableTwo();
-  sortOneTableString("num5TableTwo", 2);
+  sorting("speedNumbersTwo");
+  sortingString("category");
+  showNumber5TableTwo();
 }
 
-function sortAlphabitNum5TableTwo() {
-  sortNum5TableTwo();
-  sortOneTableString("num5TableTwo", 0);
+function sortAlphabetNum5TableTwo() {
+  sorting("speedNumbersTwo");
+  sortingString("name");
+  showNumber5TableTwo();
 }
 
 function sortWorTable() {
-  sortOneTable("worTable", 5);
+  ranking("words");
+  sorting("words");
+  showWordsTable();
 }
 
 function sortCountryWorTable() {
-  sortWorTable();
-  sortOneTableString("worTable", 1);
+  sorting("words");
+  sortingString("country");
+  showWordsTable();
 }
 
 function sortCategoryWorTable() {
-  sortWorTable();
-  sortOneTableString("worTable", 2);
+  sorting("words");
+  sortingString("category");
+  showWordsTable();
 }
 
-function sortAlphabitWorTable() {
-  sortWorTable();
-  sortOneTableString("worTable", 0);
+function sortAlphabetWorTable() {
+  sorting("words");
+  sortingString("name");
+  showWordsTable();
 }
 
 function sortNum15Table() {
-  sortOneTable("num15Table", 5);
+  ranking("longNumbers");
+  sorting("longNumbers");
+  showNumbers15Table();
 }
 
 function sortCountryNum15Table() {
-  sortNum15Table();
-  sortOneTableString("num15Table", 1);
+  sorting("longNumbers");
+  sortingString("country");
+  showNumbers15Table();
 }
 
 function sortCategoryNum15Table() {
-  sortNum15Table();
-  sortOneTableString("num15Table", 2);
+  sorting("longNumbers");
+  sortingString("category");
+  showNumbers15Table();
 }
 
-function sortAlphabitNum15Table() {
-  sortNum15Table();
-  sortOneTableString("num15Table", 0);
+function sortAlphabetNum15Table() {
+  sorting("longNumbers");
+  sortingString("name");
+  showNumbers15Table();
 }
 
 function sortNamTable() {
-  sortOneTable("namTable", 5);
+  ranking("namesAndFaces");
+  sorting("namesAndFaces");
+  showNamesTable();
 }
 
 function sortCountryNamTable() {
-  sortNamTable();
-  sortOneTableString("namTable", 1);
+  sorting("namesAndFaces");
+  sortingString("country");
+  showNamesTable();
 }
 
 function sortCategoryNamTable() {
-  sortNamTable();
-  sortOneTableString("namTable", 2);
+  sorting("namesAndFaces");
+  sortingString("category");
+  showNamesTable();
 }
 
-function sortAlphabitNamTable() {
-  sortNamTable();
-  sortOneTableString("namTable", 0);
+function sortAlphabetNamTable() {
+  sorting("namesAndFaces");
+  sortingString("name");
+  showNamesTable();
 }
 
 function sortDatTable() {
-  sortOneTable("datTable", 5);
+  ranking("dates");
+  sorting("dates");
+  showDatesTable();
 }
 
 function sortCountryDatTable() {
-  sortDatTable();
-  sortOneTableString("datTable", 1);
+  sorting("dates");
+  sortingString("country");
+  showDatesTable();
 }
 
 function sortCategoryDatTable() {
-  sortDatTable();
-  sortOneTableString("datTable", 2);
+  sorting("dates");
+  sortingString("category");
+  showDatesTable();
 }
 
-function sortAlphabitDatTable() {
-  sortDatTable();
-  sortOneTableString("datTable", 0);
+function sortAlphabetDatTable() {
+  sorting("dates");
+  sortingString("name");
+  showDatesTable();
 }
 
 function sortCarTable() {
-  sortOneTable("carTable", 5);
+  ranking("longCards");
+  sorting("longCards");
+  showCardsTable();
 }
 
 function sortCountryCarTable() {
-  sortCarTable();
-  sortOneTableString("carTable", 1);
+  sorting("longCards");
+  sortingString("country");
+  showCardsTable();
 }
 
 function sortCategoryCarTable() {
-  sortCarTable();
-  sortOneTableString("carTable", 2);
+  sorting("longCards");
+  sortingString("category");
+  showCardsTable();
 }
 
-function sortAlphabitCarTable() {
-  sortCarTable();
-  sortOneTableString("carTable", 0);
+function sortAlphabetCarTable() {
+  sorting("longCards");
+  sortingString("name");
+  showCardsTable();
 }
 
 function sortSNTableOne() {
-  sortOneTable("snTableOne", 5);
+  ranking("spokenOne");
+  sorting("spokenOne");
+  showSNTableOne();
 }
 
 function sortCountrySNTableOne() {
-  sortSNTableOne();
-  sortOneTableString("snTableOne", 1);
+  sorting("spokenOne");
+  sortingString("country");
+  showSNTableOne();
 }
 
 function sortCategorySNTableOne() {
-  sortSNTableOne();
-  sortOneTableString("snTableOne", 2);
+  sorting("spokenOne");
+  sortingString("category");
+  showSNTableOne();
 }
 
-function sortAlphabitSNTableOne() {
-  sortSNTableOne();
-  sortOneTableString("snTableOne", 0);
+function sortAlphabetSNTableOne() {
+  sorting("spokenOne");
+  sortingString("name");
+  showSNTableOne();
 }
 
 function sortSNTableTwo() {
-  sortOneTable("snTableTwo", 5);
+  ranking("spokenTwo");
+  sorting("spokenTwo");
+  showSNTableTwo();
 }
 
 function sortCountrySNTableTwo() {
-  sortSNTableTwo();
-  sortOneTableString("snTableTwo", 1);
+  sorting("spokenTwo");
+  sortingString("country");
+  showSNTableTwo();
 }
 
 function sortCategorySNTableTwo() {
-  sortSNTableTwo();
-  sortOneTableString("snTableTwo", 2);
+  sorting("spokenTwo");
+  sortingString("category");
+  showSNTableTwo();
 }
 
-function sortAlphabitSNTableTwo() {
-  sortSNTableTwo();
-  sortOneTableString("snTableTwo", 0);
+function sortAlphabetSNTableTwo() {
+  sorting("spokenTwo");
+  sortingString("name");
+  showSNTableTwo();
 }
 
 function sortSNTableThree() {
-  sortOneTable("snTableThree", 5);
+  ranking("spokenThree");
+  sorting("spokenThree");
+  showSNTableThree();
 }
 
 function sortCountrySNTableThree() {
-  sortSNTableThree();
-  sortOneTableString("snTableThree", 1);
+  sorting("spokenThree");
+  sortingString("country");
+  showSNTableThree();
 }
 
 function sortCategorySNTableThree() {
-  sortSNTableThree();
-  sortOneTableString("snTableThree", 2);
+  sorting("spokenThree");
+  sortingString("category");
+  showSNTableThree();
 }
 
-function sortAlphabitSNTableThree() {
-  sortSNTableThree();
-  sortOneTableString("snTableThree", 0);
+function sortAlphabetSNTableThree() {
+  sorting("spokenThree");
+  sortingString("name");
+  showSNTableThree();
 }
+
+const rankingSc = (score, time) => {
+  competitorData.sort((a, b) => {
+    // First, compare by 'score' in descending order
+    if (b[score] - a[score] !== 0) {
+      return b[score] - a[score];
+    }
+
+    // If scores are equal, compare by time
+    return a[time] - b[time];
+  });
+
+  let rank = 1;
+  competitorData[0].rank = rank;
+
+  for (let i = 1; i < competitorData.length; i++) {
+    if (
+      competitorData[i][score] === competitorData[i - 1][score] &&
+      competitorData[i][time] === competitorData[i - 1][time]
+    ) {
+      // If the score is the same as the previous element, share the same rank
+      competitorData[i].rank = rank;
+    } else {
+      // If the score is different, increment the rank
+      rank = i + 1;
+      competitorData[i].rank = rank;
+    }
+  }
+};
+
+const sortingSc = (score, time) => {
+  competitorData.sort((a, b) => {
+    // First, compare by 'score' in descending order
+    if (b[score] - a[score] !== 0) {
+      return b[score] - a[score];
+    }
+
+    // If scores are equal, compare by time
+    return a[time] - b[time];
+  });
+};
 
 function sortSCTableOne() {
-  sortOneTable("scTableOne", 6);
+  rankingSc("speedCardsScoreOne", "speedCardsTimeOne");
+  sortingSc("speedCardsScoreOne", "speedCardsTimeOne");
+  showSCTableOne();
 }
 
 function sortCountrySCTableOne() {
-  sortSCTableOne();
-  sortOneTableString("scTableOne", 1);
+  sortingSc("speedCardsScoreOne", "speedCardsTimeOne");
+  sortingString("country");
+  showSCTableOne();
 }
 
 function sortCategorySCTableOne() {
-  sortSCTableOne();
-  sortOneTableString("scTableOne", 2);
+  sortingSc("speedCardsScoreOne", "speedCardsTimeOne");
+  sortingString("category");
+  showSCTableOne();
 }
 
-function sortAlphabitSCTableOne() {
-  sortSCTableOne();
-  sortOneTableString("scTableOne", 0);
+function sortAlphabetSCTableOne() {
+  sortingSc("speedCardsScoreOne", "speedCardsTimeOne");
+  sortingString("name");
+  showSCTableOne();
 }
 
 function sortSCTableTwo() {
-  sortOneTable("scTableTwo", 6);
+  rankingSc("speedCardsScoreTwo", "speedCardsTimeTwo");
+  sortingSc("speedCardsScoreTwo", "speedCardsTimeTwo");
+  showSCTableTwo();
 }
 
 function sortCountrySCTableTwo() {
-  sortSCTableTwo();
-  sortOneTableString("scTableTwo", 1);
+  sortingSc("speedCardsScoreTwo", "speedCardsTimeTwo");
+  sortingString("country");
+  showSCTableTwo();
 }
 
 function sortCategorySCTableTwo() {
-  sortSCTableTwo();
-  sortOneTableString("scTableTwo", 2);
+  sortingSc("speedCardsScoreTwo", "speedCardsTimeTwo");
+  sortingString("category");
+  showSCTableTwo();
 }
 
-function sortAlphabitSCTableTwo() {
-  sortSCTableTwo();
-  sortOneTableString("scTableTwo", 0);
+function sortAlphabetSCTableTwo() {
+  sortingSc("speedCardsScoreTwo", "speedCardsTimeTwo");
+  sortingString("name");
+  showSCTableTwo();
 }
 
 let searchMood = "name";
@@ -1565,51 +1362,6 @@ function getSearchMood(id) {
   }
   search.focus();
   search.value = "";
-  showTasks();
-  showImageTable();
-  showBinaryTable();
-  showNumber5TableOne();
-  showNumber5TableTwo();
-  showWordsTable();
-  showNumbers15Table();
-  showNamesTable();
-  showDatesTable();
-  showCardsTable();
-  showSNTableOne();
-  showSNTableTwo();
-  showSNTableThree();
-  showSCTableOne();
-  showSCTableTwo();
-  sortTable();
-  rankTotal();
-  rankBin();
-  sortBinTable();
-  rankImg();
-  sortImgTable();
-  rankNum5One();
-  rankNum5Two();
-  sortNum5TableOne();
-  sortNum5TableTwo();
-  rankNum15();
-  sortNum15Table();
-  rankWor();
-  sortWorTable();
-  rankNam();
-  sortNamTable();
-  rankDat();
-  sortDatTable();
-  rankCar();
-  sortCarTable();
-  rankSNOne();
-  rankSNTwo();
-  rankSNThree();
-  sortSNTableOne();
-  sortSNTableTwo();
-  sortSNTableThree();
-  rankSCOne();
-  rankSCTwo();
-  sortSCTableOne();
-  sortSCTableTwo();
 }
 
 function searchCompetitors(value) {
@@ -1640,6 +1392,7 @@ function searchCompetitors(value) {
           speedCardsTimeOne,
           speedCardsScoreTwo,
           speedCardsTimeTwo,
+          rank,
         } = competitorData[i];
 
         let imagesPoints =
@@ -1722,6 +1475,7 @@ function searchCompetitors(value) {
                   : ""
               }
               
+              <td>${rank}</td>
               <td id="nameWidth">${name}</td>
               <td>${country || ""}</td>
               <td>${category || ""}</td>
@@ -1757,7 +1511,6 @@ function searchCompetitors(value) {
               <td>${speedCardsTimeTwo || ""}</td>
               <td>${speedCardsPointsTwo()}</td>
               <td class="total">${overallPoints}</td>
-              <td class="Rank"></td>
               ${
                 loggedIn
                   ? `
@@ -1802,6 +1555,7 @@ function searchCompetitors(value) {
           speedCardsTimeOne,
           speedCardsScoreTwo,
           speedCardsTimeTwo,
+          rank,
         } = competitorData[i];
 
         let imagesPoints =
@@ -1884,6 +1638,7 @@ function searchCompetitors(value) {
                   : ""
               }
               
+              <td>${rank}</td>
               <td id="nameWidth">${name}</td>
               <td>${country || ""}</td>
               <td>${category || ""}</td>
@@ -1919,7 +1674,6 @@ function searchCompetitors(value) {
               <td>${speedCardsTimeTwo || ""}</td>
               <td>${speedCardsPointsTwo()}</td>
               <td class="total">${overallPoints}</td>
-              <td class="Rank"></td>
               ${
                 loggedIn
                   ? `
@@ -1937,6 +1691,4 @@ function searchCompetitors(value) {
     }
   }
   document.getElementById("tbody").innerHTML = table;
-  rankTotal();
-  sortTable();
 }

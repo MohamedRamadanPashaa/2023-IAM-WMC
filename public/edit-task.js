@@ -51,121 +51,111 @@ let spokenStandards = 47.3;
 
 // Calculate Points
 // get images pts
+// Calculate Points
+// get images pts
+const calcPoints = (score, standard) =>
+  Math.round((score / standard) * 1000 * 100) / 100;
+
 getTotalPoints();
-images5Score.onkeyup = function () {
-  images5Points.value =
-    Math.round((images5Score.value / imagesStandards) * 1000 * 100) / 100;
+images5Score.onkeyup = () => {
+  images5Points.value = calcPoints(images5Score.value, imagesStandards);
   getTotalPoints();
 };
 
 // get binary pts
-binary5Score.onkeyup = function () {
-  binary5Points.value =
-    Math.round((binary5Score.value / binaryStandards) * 1000 * 100) / 100;
+binary5Score.onkeyup = () => {
+  binary5Points.value = calcPoints(binary5Score.value, binaryStandards);
   getTotalPoints();
 };
 
 // get 5-Min Numbers pts
-number5ScoreOne.onkeyup = function () {
-  number5PointsOne.value =
-    Math.round((number5ScoreOne.value / speedNumbersStandards) * 1000 * 100) /
-    100;
+number5ScoreOne.onkeyup = () => {
+  number5PointsOne.value = calcPoints(
+    number5ScoreOne.value,
+    speedNumbersStandards
+  );
   getTotalPoints();
 };
 
-number5ScoreTwo.onkeyup = function () {
-  number5PointsTwo.value =
-    Math.round((number5ScoreTwo.value / speedNumbersStandards) * 1000 * 100) /
-    100;
+number5ScoreTwo.onkeyup = () => {
+  number5PointsTwo.value = calcPoints(
+    number5ScoreTwo.value,
+    speedNumbersStandards
+  );
   getTotalPoints();
 };
 
 // get 15-Min Numbers pts
-number15Score.onkeyup = function () {
-  number15Points.value =
-    Math.round((number15Score.value / longNumbersStandards) * 1000 * 100) / 100;
+number15Score.onkeyup = () => {
+  number15Points.value = calcPoints(number15Score.value, longNumbersStandards);
+
   getTotalPoints();
 };
 
 // get 5-Min Names&faces pts
-names5Score.onkeyup = function () {
-  names5Points.value =
-    Math.round((names5Score.value / namesAndFacesStandards) * 1000 * 100) / 100;
+names5Score.onkeyup = () => {
+  names5Points.value = calcPoints(names5Score.value, namesAndFacesStandards);
   getTotalPoints();
 };
 
 // get 5-Min Dates pts
-dates5Score.onkeyup = function () {
-  dates5Points.value =
-    Math.round((dates5Score.value / datesStandards) * 1000 * 100) / 100;
+dates5Score.onkeyup = () => {
+  dates5Points.value = calcPoints(dates5Score.value, datesStandards);
   getTotalPoints();
 };
 
 // get 5-Min Words pts
-words5Score.onkeyup = function () {
-  words5Points.value =
-    Math.round((words5Score.value / wordsStandards) * 1000 * 100) / 100;
+words5Score.onkeyup = () => {
+  words5Points.value = calcPoints(words5Score.value, wordsStandards);
   getTotalPoints();
 };
 
 // get 10-Min Cards pts
-cards10Score.onkeyup = function () {
-  cards10Points.value =
-    Math.round((cards10Score.value / longCardsStandards) * 1000 * 100) / 100;
+cards10Score.onkeyup = () => {
+  cards10Points.value = calcPoints(cards10Score.value, longCardsStandards);
   getTotalPoints();
 };
 
 // get spoken numbers Cards pts
-snScoreOne.onkeyup = function () {
-  snPointsOne.value =
-    Math.round(Math.sqrt(snScoreOne.value) * spokenStandards * 100) / 100;
+const calcSpokenPoints = (score) =>
+  Math.round(Math.sqrt(score) * spokenStandards * 100) / 100;
+
+snScoreOne.onkeyup = () => {
+  snPointsOne.value = calcSpokenPoints(snScoreOne.value);
   getTotalPoints();
 };
-snScoreTwo.onkeyup = function () {
-  snPointsTwo.value =
-    Math.round(Math.sqrt(snScoreTwo.value) * spokenStandards * 100) / 100;
+snScoreTwo.onkeyup = () => {
+  snPointsTwo.value = calcSpokenPoints(snScoreTwo.value);
   getTotalPoints();
 };
-snScoreThree.onkeyup = function () {
-  snPointsThree.value =
-    Math.round(Math.sqrt(snScoreThree.value) * spokenStandards * 100) / 100;
+snScoreThree.onkeyup = () => {
+  snPointsThree.value = calcSpokenPoints(snScoreThree.value);
   getTotalPoints();
 };
 
 // get Speed Cards pts
-function getscPointsOne() {
-  scScoreOne.innerHTML = 52;
-  if (
-    +scTimeOne.value < 300 &&
-    scTimeOne.value !== "" &&
-    +scScoreOne.value === 52
-  ) {
-    scPointsOne.value =
-      Math.round((6862 / Math.pow(scTimeOne.value, 0.75)) * 100) / 100;
-  } else if (+scScoreOne.value <= 52 && +scTimeOne.value === 300) {
-    scPointsOne.value = Math.round((scScoreOne.value / 52) * 95.6 * 100) / 100;
-  } else if (+scScoreOne.value <= 52 && +scTimeOne.value !== 300) {
-    scPointsOne.value = Math.round((scScoreOne.value / 52) * 95.6 * 100) / 100;
+const getScPoints = (score, time) => {
+  let points;
+  if (+time < 300 && time !== "" && +score === 52) {
+    points = Math.round((6862 / Math.pow(time, 0.75)) * 100) / 100;
+  } else if (+score <= 52 && +time === 300) {
+    points = Math.round((score / 52) * 95.6 * 100) / 100;
+  } else if (+score <= 52 && +time !== 300) {
+    points = Math.round((score / 52) * 95.6 * 100) / 100;
   }
-  getTotalPoints();
-}
 
-function getscPointsTwo() {
-  scScoreTwo.innerHTML = 52;
-  if (
-    +scTimeTwo.value < 300 &&
-    scTimeTwo.value !== "" &&
-    +scScoreTwo.value === 52
-  ) {
-    scPointsTwo.value =
-      Math.round((6862 / Math.pow(scTimeTwo.value, 0.75)) * 100) / 100;
-  } else if (+scScoreTwo.value <= 52 && +scTimeTwo.value === 300) {
-    scPointsTwo.value = Math.round((scScoreTwo.value / 52) * 95.6 * 100) / 100;
-  } else if (+scScoreTwo.value <= 52 && +scTimeTwo.value !== 300) {
-    scPointsTwo.value = Math.round((scScoreTwo.value / 52) * 95.6 * 100) / 100;
-  }
+  return points;
+};
+
+const getScPointsOne = () => {
+  scPointsOne.value = getScPoints(scScoreOne.value, scTimeOne.value);
   getTotalPoints();
-}
+};
+
+const getScPointsTwo = () => {
+  scPointsTwo.value = getScPoints(scScoreTwo.value, scTimeTwo.value);
+  getTotalPoints();
+};
 
 function getTotalPoints() {
   TPoints.value =
@@ -239,58 +229,21 @@ const showTask = async () => {
     scScoreTwo.value = speedCardsScoreTwo;
     scTimeTwo.value = speedCardsTimeTwo;
 
-    // get images pts
-    images5Points.value =
-      Math.round((images / imagesStandards) * 1000 * 100) / 100;
-    // get binary pts
-    binary5Points.value =
-      Math.round((binary / binaryStandards) * 1000 * 100) / 100;
-    // get 5-Min Numbers pts
-    number5PointsOne.value =
-      Math.round((speedNumbersOne / speedNumbersStandards) * 1000 * 100) / 100;
-    number5PointsTwo.value =
-      Math.round((speedNumbersTwo / speedNumbersStandards) * 1000 * 100) / 100;
-    // get 15-Min Numbers pts
-    number15Points.value =
-      Math.round((longNumbers / longNumbersStandards) * 1000 * 100) / 100;
-
-    // get 5-Min Names&faces pts
-    names5Points.value =
-      Math.round((namesAndFaces / namesAndFacesStandards) * 1000 * 100) / 100;
-
-    // get 5-Min Dates pts
-    dates5Points.value =
-      Math.round((dates / datesStandards) * 1000 * 100) / 100;
-
-    // get 5-Min Words pts
-    words5Points.value =
-      Math.round((words / wordsStandards) * 1000 * 100) / 100;
-
-    // get 10-Min Cards pts
-    cards10Points.value =
-      Math.round((longCards / longCardsStandards) * 1000 * 100) / 100;
-
-    // get 10-Min Cards pts
-    snPointsOne.value =
-      Math.round(Math.sqrt(spokenOne) * spokenStandards * 100) / 100;
-    snPointsTwo.value =
-      Math.round(Math.sqrt(spokenTwo) * spokenStandards * 100) / 100;
-    snPointsThree.value =
-      Math.round(Math.sqrt(spokenThree) * spokenStandards * 100) / 100;
-
-    // get Speed Cards pts
-    let speedCardsPoints = (score, time) => {
-      if (time < 300 && score == 52) {
-        return Math.round((6862 / Math.pow(time, 0.75)) * 100) / 100;
-      } else if (score <= 52 && time == 300) {
-        return Math.round((score / 52) * 95.6 * 100) / 100;
-      } else if (score <= 52 && time != 300) {
-        return Math.round((score / 52) * 95.6 * 100) / 100;
-      }
-    };
-
-    scPointsOne.value = speedCardsPoints(speedCardsScoreOne, speedCardsTimeOne);
-    scPointsTwo.value = speedCardsPoints(speedCardsScoreTwo, speedCardsTimeTwo);
+    // get pts
+    images5Points.value = calcPoints(images, imagesStandards);
+    binary5Points.value = calcPoints(binary, binaryStandards);
+    number5PointsOne.value = calcPoints(speedNumbersOne, speedNumbersStandards);
+    number5PointsTwo.value = calcPoints(speedNumbersTwo, speedNumbersStandards);
+    number15Points.value = calcPoints(longNumbers, longNumbersStandards);
+    names5Points.value = calcPoints(namesAndFaces, namesAndFacesStandards);
+    dates5Points.value = calcPoints(dates, datesStandards);
+    words5Points.value = calcPoints(words, wordsStandards);
+    cards10Points.value = calcPoints(longCards, longCardsStandards);
+    snPointsOne.value = calcSpokenPoints(spokenOne);
+    snPointsTwo.value = calcSpokenPoints(spokenTwo);
+    snPointsThree.value = calcSpokenPoints(spokenThree);
+    scPointsOne.value = getScPoints(speedCardsScoreOne, speedCardsTimeOne);
+    scPointsTwo.value = getScPoints(speedCardsScoreTwo, speedCardsTimeTwo);
 
     getTotalPoints();
 
