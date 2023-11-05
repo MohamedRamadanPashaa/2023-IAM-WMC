@@ -256,7 +256,7 @@ const loadData = async () => {
     } = await axios.get("/api/v1/tasks");
 
     // Sort the array based on name
-    competitorData = tasks.sort((a, b) => b.name - a.name);
+    competitorData = tasks.sort((a, b) => a.name.localeCompare(b.name));
 
     for (let i = 0; i < competitorData.length; i++) {
       const {
@@ -323,7 +323,7 @@ const loadData = async () => {
 
       overallPoints = Math.round(overallPoints * 100) / 100;
 
-      competitorData[i].overall = overallPoints;
+      competitorData[i].overall = overallPoints || 0;
     }
   } catch (error) {
     document.getElementById("tbody").innerHTML =
