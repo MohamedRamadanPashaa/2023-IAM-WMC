@@ -246,6 +246,55 @@ function getTotalPoints() {
   TPoints.style.fontSize = "22px";
 }
 
+const itemsPerPage = 20;
+const pages = document.querySelector(".pages");
+let page = 1;
+
+const createPagesNumber = () => {
+  const pageCount = Math.ceil(competitorData.length / itemsPerPage);
+  if (pageCount > 1)
+    for (let i = 1; i <= pageCount; i++) {
+      const page = document.createElement("div");
+      page.innerHTML = i;
+      page.className = "page";
+      page.id = `page-${i}`;
+      i === 1 && page.classList.add("active-page");
+      page.onclick = () => clickPage(i);
+      pages.appendChild(page);
+    }
+};
+
+const clickPage = (p) => {
+  page = p;
+  const data = competitorData.filter(
+    (el, i) => i >= (page - 1) * itemsPerPage - 1 && i < page * itemsPerPage - 1
+  );
+
+  const pagesPagination = document.querySelectorAll(".page");
+  pagesPagination.forEach((el) => {
+    el.classList.remove("active-page");
+  });
+
+  const currPage = document.getElementById(`page-${page}`);
+  currPage.classList.add("active-page");
+
+  showTasks(data);
+  showImageTable();
+  showBinaryTable();
+  showNumber5TableOne();
+  showNumber5TableTwo();
+  showWordsTable();
+  showNumbers15Table();
+  showNamesTable();
+  showDatesTable();
+  showCardsTable();
+  showSNTableOne();
+  showSNTableTwo();
+  showSNTableThree();
+  showSCTableOne();
+  showSCTableTwo();
+};
+
 let competitorData = [];
 const loadData = async () => {
   loadingDOM.style.visibility = "visible";
@@ -332,13 +381,16 @@ const loadData = async () => {
 
   loadingDOM.style.visibility = "hidden";
   ranking("overall");
+  createPagesNumber();
   showTasks();
 };
 loadData();
 
 // Load tasks from /api/tasks
-const showTasks = () => {
-  if (competitorData.length === 0) {
+const showTasks = (
+  data = competitorData.filter((el, i) => i >= 0 && i < 20)
+) => {
+  if (data.length === 0) {
     document.getElementById("tbody").innerHTML = `
         <tr class="empty-list">
           <td colspan="38">No data to show</td>
@@ -348,7 +400,7 @@ const showTasks = () => {
   }
 
   let table = "";
-  for (let i = 0; i < competitorData.length; i++) {
+  for (let i = 0; i < data.length; i++) {
     const {
       completed,
       _id: taskID,
@@ -374,7 +426,7 @@ const showTasks = () => {
       speedCardsTimeTwo,
       overall,
       rank,
-    } = competitorData[i];
+    } = data[i];
 
     let imagesPoints = calcPoints(images, imagesStandards) || "";
     let binaryPoints = calcPoints(binary, binaryStandards) || "";
@@ -516,71 +568,110 @@ function displayImageTable() {
   displayOneTable("img-table", "img-btn");
   sortImgTable();
   showImageTable();
+  page = 1;
+  document.getElementById(`page-${1}`).click();
 }
+
 function displayBinaryTable() {
   displayOneTable("bin-table", "bin-btn");
   sortBinTable();
   showBinaryTable();
+  page = 1;
+  document.getElementById(`page-${1}`).click();
 }
+
 function displayNumbers5TableOne() {
   displayOneTable("num5-table-one", "num5-btn-one");
   sortNum5TableOne();
   showNumber5TableOne();
+  page = 1;
+  document.getElementById(`page-${1}`).click();
 }
+
 function displayNumbers5TableTwo() {
   displayOneTable("num5-table-two", "num5-btn-two");
   sortNum5TableTwo();
   showNumber5TableTwo();
+  page = 1;
+  document.getElementById(`page-${1}`).click();
 }
 function displayWordsTable() {
   displayOneTable("wor-table", "wor-btn");
   sortWorTable();
   showWordsTable();
+  page = 1;
+  document.getElementById(`page-${1}`).click();
 }
+
 function displayNumbers15Table() {
   displayOneTable("num15-table", "num15-btn");
   sortNum15Table();
   showNumbers15Table();
+  page = 1;
+  document.getElementById(`page-${1}`).click();
 }
+
 function displayNamesTable() {
   displayOneTable("nam-table", "nam-btn");
   sortNamTable();
   showNamesTable();
+  page = 1;
+  document.getElementById(`page-${1}`).click();
 }
+
 function displayDatesTable() {
   displayOneTable("dat-table", "dat-btn");
   sortDatTable();
   showDatesTable();
+  page = 1;
+  document.getElementById(`page-${1}`).click();
 }
+
 function displayCardsTable() {
   displayOneTable("car-table", "car-btn");
   sortCarTable();
   showCardsTable();
+  page = 1;
+  document.getElementById(`page-${1}`).click();
 }
+
 function displaySNTableOne() {
   displayOneTable("sn-table-one", "sn-btn-one");
   sortSNTableOne();
   showSNTableOne();
+  page = 1;
+  document.getElementById(`page-${1}`).click();
 }
 function displaySNTableTwo() {
   displayOneTable("sn-table-two", "sn-btn-two");
   sortSNTableTwo();
   showSNTableTwo();
+  page = 1;
+  document.getElementById(`page-${1}`).click();
 }
+
 function displaySNTableThree() {
   displayOneTable("sn-table-three", "sn-btn-three");
   sortSNTableThree();
   showSNTableThree();
+  page = 1;
+  document.getElementById(`page-${1}`).click();
 }
+
 function displaySCTableOne() {
   displayOneTable("sc-table-one", "sc-btn-one");
   sortSCTableOne();
   showSCTableOne();
+  page = 1;
+  document.getElementById(`page-${1}`).click();
 }
+
 function displaySCTableTwo() {
   displayOneTable("sc-table-two", "sc-btn-two");
   sortSCTableTwo();
   showSCTableTwo();
+  page = 1;
+  document.getElementById(`page-${1}`).click();
 }
 
 // enter to go to next field
@@ -644,20 +735,20 @@ function showCardsTable() {
 
 function showTable(test, tableId, standard, classRank) {
   let table = "";
-  for (let i = 0; i < competitorData.length; i++)
+  const data = competitorData.filter(
+    (el, i) => i >= (page - 1) * itemsPerPage - 1 && i < page * itemsPerPage - 1
+  );
+  for (let i = 0; i < data.length; i++)
     table += `
         <tr>
-            <td>${competitorData[i].rank}</td>
-            <td id="nameWidth">${competitorData[i].name}</td>
-            <td>${competitorData[i].country}</td>
-            <td>${competitorData[i].category}</td>
-            <td>${competitorData[i].IAMID || ""}</td>
-            <td>${competitorData[i][test] || ""}</td>
+            <td>${data[i].rank}</td>
+            <td id="nameWidth">${data[i].name}</td>
+            <td>${data[i].country}</td>
+            <td>${data[i].category}</td>
+            <td>${data[i].IAMID || ""}</td>
+            <td>${data[i][test] || ""}</td>
             <td class=${classRank}>
-              ${
-                Math.round((competitorData[i][test] / standard) * 1000 * 100) /
-                  100 || ""
-              }
+              ${Math.round((data[i][test] / standard) * 1000 * 100) / 100 || ""}
             </td>
         </tr>
     `;
@@ -678,17 +769,20 @@ function showSNTableThree() {
 
 function showSNTable(test, tableId, standard, snRank) {
   let snTable = "";
-  for (let i = 0; i < competitorData.length; i++)
+  const data = competitorData.filter(
+    (el, i) => i >= (page - 1) * itemsPerPage - 1 && i < page * itemsPerPage - 1
+  );
+  for (let i = 0; i < data.length; i++)
     snTable += `
     <tr>
-                <td id="nameWidth">${competitorData[i].rank}</td>
-                <td id="nameWidth">${competitorData[i].name}</td>
-                <td>${competitorData[i].country}</td>
-                <td>${competitorData[i].category}</td>
-                <td>${competitorData[i].IAMID || ""}</td>
-                <td>${competitorData[i][test] || ""}</td>
+                <td id="nameWidth">${data[i].rank}</td>
+                <td id="nameWidth">${data[i].name}</td>
+                <td>${data[i].country}</td>
+                <td>${data[i].category}</td>
+                <td>${data[i].IAMID || ""}</td>
+                <td>${data[i][test] || ""}</td>
                 <td class=${snRank}>${
-      Math.round(Math.sqrt(competitorData[i][test]) * standard * 100) / 100
+      Math.round(Math.sqrt(data[i][test]) * standard * 100) / 100 || ""
     }</td>
             </tr>
     `;
@@ -697,46 +791,39 @@ function showSNTable(test, tableId, standard, snRank) {
 
 function showSCTableOne() {
   let scTable = "";
-  for (let i = 0; i < competitorData.length; i++) {
+  const data = competitorData.filter(
+    (el, i) => i >= (page - 1) * itemsPerPage - 1 && i < page * itemsPerPage - 1
+  );
+  for (let i = 0; i < data.length; i++) {
     let speedCardsPoints = () => {
-      if (
-        competitorData[i].speedCardsTimeOne < 300 &&
-        competitorData[i].speedCardsScoreOne == 52
-      ) {
+      if (data[i].speedCardsTimeOne < 300 && data[i].speedCardsScoreOne == 52) {
         return (
-          Math.round(
-            (6862 / Math.pow(competitorData[i].speedCardsTimeOne, 0.75)) * 100
-          ) / 100
-        );
-      } else if (
-        competitorData[i].speedCardsScoreOne <= 52 &&
-        competitorData[i].speedCardsTimeOne == 300
-      ) {
-        return (
-          Math.round((competitorData[i].speedCardsScoreOne / 52) * 95.6 * 100) /
+          Math.round((6862 / Math.pow(data[i].speedCardsTimeOne, 0.75)) * 100) /
           100
         );
       } else if (
-        competitorData[i].speedCardsScoreOne <= 52 &&
-        competitorData[i].speedCardsTimeOne != 300
+        data[i].speedCardsScoreOne <= 52 &&
+        data[i].speedCardsTimeOne == 300
       ) {
-        return (
-          Math.round((competitorData[i].speedCardsScoreOne / 52) * 95.6 * 100) /
-          100
-        );
+        return Math.round((data[i].speedCardsScoreOne / 52) * 95.6 * 100) / 100;
+      } else if (
+        data[i].speedCardsScoreOne <= 52 &&
+        data[i].speedCardsTimeOne != 300
+      ) {
+        return Math.round((data[i].speedCardsScoreOne / 52) * 95.6 * 100) / 100;
       }
     };
 
     scTable += `
             <tr>
-                <td>${competitorData[i].rank}</td>
-                <td id="nameWidth">${competitorData[i].name}</td>
-                <td>${competitorData[i].country}</td>
-                <td>${competitorData[i].category}</td>
-                <td>${competitorData[i].IAMID || ""}</td>
-                <td>${competitorData[i].speedCardsScoreOne || ""}</td>
-                <td>${competitorData[i].speedCardsTimeOne || ""}</td>
-                <td class="scRankOne">${speedCardsPoints()}</td>
+                <td>${data[i].rank}</td>
+                <td id="nameWidth">${data[i].name}</td>
+                <td>${data[i].country}</td>
+                <td>${data[i].category}</td>
+                <td>${data[i].IAMID || ""}</td>
+                <td>${data[i].speedCardsScoreOne || ""}</td>
+                <td>${data[i].speedCardsTimeOne || ""}</td>
+                <td class="scRankOne">${speedCardsPoints() || ""}</td>
             </tr>
     `;
   }
@@ -745,46 +832,39 @@ function showSCTableOne() {
 
 function showSCTableTwo() {
   let scTable = "";
-  for (let i = 0; i < competitorData.length; i++) {
+  const data = competitorData.filter(
+    (el, i) => i >= (page - 1) * itemsPerPage - 1 && i < page * itemsPerPage - 1
+  );
+  for (let i = 0; i < data.length; i++) {
     let speedCardsPoints = () => {
-      if (
-        competitorData[i].speedCardsTimeTwo < 300 &&
-        competitorData[i].speedCardsScoreTwo == 52
-      ) {
+      if (data[i].speedCardsTimeTwo < 300 && data[i].speedCardsScoreTwo == 52) {
         return (
-          Math.round(
-            (6862 / Math.pow(competitorData[i].speedCardsTimeTwo, 0.75)) * 100
-          ) / 100
-        );
-      } else if (
-        competitorData[i].speedCardsScoreTwo <= 52 &&
-        competitorData[i].speedCardsTimeTwo == 300
-      ) {
-        return (
-          Math.round((competitorData[i].speedCardsScoreTwo / 52) * 95.6 * 100) /
+          Math.round((6862 / Math.pow(data[i].speedCardsTimeTwo, 0.75)) * 100) /
           100
         );
       } else if (
-        competitorData[i].speedCardsScoreTwo <= 52 &&
-        competitorData[i].speedCardsTimeTwo != 300
+        data[i].speedCardsScoreTwo <= 52 &&
+        data[i].speedCardsTimeTwo == 300
       ) {
-        return (
-          Math.round((competitorData[i].speedCardsScoreTwo / 52) * 95.6 * 100) /
-          100
-        );
+        return Math.round((data[i].speedCardsScoreTwo / 52) * 95.6 * 100) / 100;
+      } else if (
+        data[i].speedCardsScoreTwo <= 52 &&
+        data[i].speedCardsTimeTwo != 300
+      ) {
+        return Math.round((data[i].speedCardsScoreTwo / 52) * 95.6 * 100) / 100;
       }
     };
 
     scTable += `
             <tr>
-                <td id="nameWidth">${competitorData[i].rank}</td>
-                <td id="nameWidth">${competitorData[i].name}</td>
-                <td>${competitorData[i].country}</td>
-                <td>${competitorData[i].category}</td>
-                <td>${competitorData[i].IAMID || ""}</td>
-                <td>${competitorData[i].speedCardsScoreTwo || ""}</td>
-                <td>${competitorData[i].speedCardsTimeTwo || ""}</td>
-                <td class="scRankTwo">${speedCardsPoints()}</td>
+                <td id="nameWidth">${data[i].rank}</td>
+                <td id="nameWidth">${data[i].name}</td>
+                <td>${data[i].country}</td>
+                <td>${data[i].category}</td>
+                <td>${data[i].IAMID || ""}</td>
+                <td>${data[i].speedCardsScoreTwo || ""}</td>
+                <td>${data[i].speedCardsTimeTwo || ""}</td>
+                <td class="scRankTwo">${speedCardsPoints() || ""}</td>
             </tr>
     `;
   }
@@ -1365,330 +1445,18 @@ function getSearchMood(id) {
 }
 
 function searchCompetitors(value) {
-  let table = "";
   if (searchMood == "name") {
-    for (let i = 0; i < competitorData.length; i++) {
-      if (competitorData[i].name.toLowerCase().includes(value.toLowerCase())) {
-        const {
-          completed,
-          _id: taskID,
-          name,
-          IAMID,
-          country,
-          category,
-          images,
-          binary,
-          longNumbers,
-          speedNumbersOne,
-          speedNumbersTwo,
-          namesAndFaces,
-          words,
-          longCards,
-          dates,
-          spokenOne,
-          spokenTwo,
-          spokenThree,
-          speedCardsScoreOne,
-          speedCardsTimeOne,
-          speedCardsScoreTwo,
-          speedCardsTimeTwo,
-          rank,
-        } = competitorData[i];
+    const data = competitorData.filter((el) =>
+      el.name.toLowerCase().includes(value.toLowerCase())
+    );
 
-        let imagesPoints =
-          Math.round((images / imagesStandards) * 1000 * 100) / 100;
-        let binaryPoints =
-          Math.round((binary / binaryStandards) * 1000 * 100) / 100;
-        let longNumbersPoints =
-          Math.round((longNumbers / longNumbersStandards) * 1000 * 100) / 100;
-        let speedNumbersPointsOne =
-          Math.round((speedNumbersOne / speedNumbersStandards) * 1000 * 100) /
-          100;
-        let speedNumbersPointsTwo =
-          Math.round((speedNumbersTwo / speedNumbersStandards) * 1000 * 100) /
-          100;
-        let namesAndFacesPoints =
-          Math.round((namesAndFaces / namesAndFacesStandards) * 1000 * 100) /
-          100;
-        let wordsPoints =
-          Math.round((words / wordsStandards) * 1000 * 100) / 100;
-        let datesPoints =
-          Math.round((dates / datesStandards) * 1000 * 100) / 100;
-        let longCardsPoints =
-          Math.round((longCards / longCardsStandards) * 1000 * 100) / 100;
-        let spokenPointsOne =
-          Math.round(Math.sqrt(spokenOne) * spokenStandards * 100) / 100;
-        let spokenPointsTwo =
-          Math.round(Math.sqrt(spokenTwo) * spokenStandards * 100) / 100;
-        let spokenPointsThree =
-          Math.round(Math.sqrt(spokenThree) * spokenStandards * 100) / 100;
-
-        let speedCardsPointsOne = () => {
-          if (speedCardsTimeOne < 300 && speedCardsScoreOne == 52) {
-            return (
-              Math.round((6862 / Math.pow(speedCardsTimeOne, 0.75)) * 100) / 100
-            );
-          } else if (speedCardsScoreOne <= 52 && speedCardsTimeOne == 300) {
-            return Math.round((speedCardsScoreOne / 52) * 95.6 * 100) / 100;
-          } else if (speedCardsScoreOne <= 52 && speedCardsTimeOne != 300) {
-            return Math.round((speedCardsScoreOne / 52) * 95.6 * 100) / 100;
-          }
-        };
-
-        let speedCardsPointsTwo = () => {
-          if (speedCardsTimeTwo < 300 && speedCardsScoreTwo == 52) {
-            return (
-              Math.round((6862 / Math.pow(speedCardsTimeTwo, 0.75)) * 100) / 100
-            );
-          } else if (speedCardsScoreTwo <= 52 && speedCardsTimeTwo == 300) {
-            return Math.round((speedCardsScoreTwo / 52) * 95.6 * 100) / 100;
-          } else if (speedCardsScoreTwo <= 52 && speedCardsTimeTwo != 300) {
-            return Math.round((speedCardsScoreTwo / 52) * 95.6 * 100) / 100;
-          }
-        };
-
-        let overallPoints =
-          imagesPoints +
-          binaryPoints +
-          longNumbersPoints +
-          Math.max(speedNumbersPointsOne, speedNumbersPointsTwo) +
-          namesAndFacesPoints +
-          wordsPoints +
-          datesPoints +
-          longCardsPoints +
-          Math.max(spokenPointsOne, spokenPointsTwo, spokenPointsThree) +
-          Math.max(speedCardsPointsOne(), speedCardsPointsTwo());
-
-        overallPoints = Math.round(overallPoints * 100) / 100;
-
-        table += `
-      <tr> 
-              ${
-                loggedIn
-                  ? `
-              <td>
-                <a href="task.html?id=${taskID}"  class="edit-link">
-                <i class="fas fa-edit"></i>
-                </a>
-              </td>
-              `
-                  : ""
-              }
-              
-              <td>${rank}</td>
-              <td id="nameWidth">${name}</td>
-              <td>${country || ""}</td>
-              <td>${category || ""}</td>
-              <td>${IAMID || ""}</td>
-              <td>${images || ""}</td>
-              <td>${imagesPoints}</td>
-              <td>${binary || ""}</td>
-              <td>${binaryPoints}</td>
-              <td>${speedNumbersOne || ""}</td>
-              <td>${speedNumbersPointsOne}</td>
-              <td>${speedNumbersTwo || ""}</td>
-              <td>${speedNumbersPointsTwo}</td>
-              <td>${longNumbers || ""}</td>
-              <td>${longNumbersPoints}</td>
-              <td>${namesAndFaces || ""}</td>
-              <td>${namesAndFacesPoints}</td>
-              <td>${dates || ""}</td>
-              <td>${datesPoints}</td>
-              <td>${words || ""}</td>
-              <td>${wordsPoints}</td>
-              <td>${longCards || ""}</td>
-              <td>${longCardsPoints}</td>
-              <td>${spokenOne || ""}</td>
-              <td>${spokenPointsOne}</td>
-              <td>${spokenTwo || ""}</td>
-              <td>${spokenPointsTwo}</td>
-              <td>${spokenThree || ""}</td>
-              <td>${spokenPointsThree}</td>
-              <td>${speedCardsScoreOne || ""}</td>
-              <td>${speedCardsTimeOne || ""}</td>
-              <td>${speedCardsPointsOne()}</td>
-              <td>${speedCardsScoreTwo || ""}</td>
-              <td>${speedCardsTimeTwo || ""}</td>
-              <td>${speedCardsPointsTwo()}</td>
-              <td class="total">${overallPoints}</td>
-              ${
-                loggedIn
-                  ? `
-              <td>
-                <button type="button" class="delete-btn" data-id="${taskID}" data-name="${name}">
-                <i class="fas fa-trash"></i>
-                </button>
-              </td>
-              `
-                  : ""
-              }
-          </tr>
-`;
-      }
-    }
+    showTasks(data);
   } else {
-    for (let i = 0; i < competitorData.length; i++) {
-      if (
-        competitorData[i].IAMID &&
-        competitorData[i].IAMID.toString().includes(value)
-      ) {
-        const {
-          completed,
-          _id: taskID,
-          name,
-          IAMID,
-          country,
-          category,
-          images,
-          binary,
-          longNumbers,
-          speedNumbersOne,
-          speedNumbersTwo,
-          namesAndFaces,
-          words,
-          longCards,
-          dates,
-          spokenOne,
-          spokenTwo,
-          spokenThree,
-          speedCardsScoreOne,
-          speedCardsTimeOne,
-          speedCardsScoreTwo,
-          speedCardsTimeTwo,
-          rank,
-        } = competitorData[i];
-
-        let imagesPoints =
-          Math.round((images / imagesStandards) * 1000 * 100) / 100;
-        let binaryPoints =
-          Math.round((binary / binaryStandards) * 1000 * 100) / 100;
-        let longNumbersPoints =
-          Math.round((longNumbers / longNumbersStandards) * 1000 * 100) / 100;
-        let speedNumbersPointsOne =
-          Math.round((speedNumbersOne / speedNumbersStandards) * 1000 * 100) /
-          100;
-        let speedNumbersPointsTwo =
-          Math.round((speedNumbersTwo / speedNumbersStandards) * 1000 * 100) /
-          100;
-        let namesAndFacesPoints =
-          Math.round((namesAndFaces / namesAndFacesStandards) * 1000 * 100) /
-          100;
-        let wordsPoints =
-          Math.round((words / wordsStandards) * 1000 * 100) / 100;
-        let datesPoints =
-          Math.round((dates / datesStandards) * 1000 * 100) / 100;
-        let longCardsPoints =
-          Math.round((longCards / longCardsStandards) * 1000 * 100) / 100;
-        let spokenPointsOne =
-          Math.round(Math.sqrt(spokenOne) * spokenStandards * 100) / 100;
-        let spokenPointsTwo =
-          Math.round(Math.sqrt(spokenTwo) * spokenStandards * 100) / 100;
-        let spokenPointsThree =
-          Math.round(Math.sqrt(spokenThree) * spokenStandards * 100) / 100;
-
-        let speedCardsPointsOne = () => {
-          if (speedCardsTimeOne < 300 && speedCardsScoreOne == 52) {
-            return (
-              Math.round((6862 / Math.pow(speedCardsTimeOne, 0.75)) * 100) / 100
-            );
-          } else if (speedCardsScoreOne <= 52 && speedCardsTimeOne == 300) {
-            return Math.round((speedCardsScoreOne / 52) * 95.6 * 100) / 100;
-          } else if (speedCardsScoreOne <= 52 && speedCardsTimeOne != 300) {
-            return Math.round((speedCardsScoreOne / 52) * 95.6 * 100) / 100;
-          }
-        };
-
-        let speedCardsPointsTwo = () => {
-          if (speedCardsTimeTwo < 300 && speedCardsScoreTwo == 52) {
-            return (
-              Math.round((6862 / Math.pow(speedCardsTimeTwo, 0.75)) * 100) / 100
-            );
-          } else if (speedCardsScoreTwo <= 52 && speedCardsTimeTwo == 300) {
-            return Math.round((speedCardsScoreTwo / 52) * 95.6 * 100) / 100;
-          } else if (speedCardsScoreTwo <= 52 && speedCardsTimeTwo != 300) {
-            return Math.round((speedCardsScoreTwo / 52) * 95.6 * 100) / 100;
-          }
-        };
-
-        let overallPoints =
-          imagesPoints +
-          binaryPoints +
-          longNumbersPoints +
-          Math.max(speedNumbersPointsOne, speedNumbersPointsTwo) +
-          namesAndFacesPoints +
-          wordsPoints +
-          datesPoints +
-          longCardsPoints +
-          Math.max(spokenPointsOne, spokenPointsTwo, spokenPointsThree) +
-          Math.max(speedCardsPointsOne(), speedCardsPointsTwo());
-
-        overallPoints = Math.round(overallPoints * 100) / 100;
-
-        table += `
-      <tr> 
-              ${
-                loggedIn
-                  ? `
-              <td>
-                <a href="task.html?id=${taskID}"  class="edit-link">
-                <i class="fas fa-edit"></i>
-                </a>
-              </td>
-              `
-                  : ""
-              }
-              
-              <td>${rank}</td>
-              <td id="nameWidth">${name}</td>
-              <td>${country || ""}</td>
-              <td>${category || ""}</td>
-              <td>${IAMID || ""}</td>
-              <td>${images || ""}</td>
-              <td>${imagesPoints}</td>
-              <td>${binary || ""}</td>
-              <td>${binaryPoints}</td>
-              <td>${speedNumbersOne || ""}</td>
-              <td>${speedNumbersPointsOne}</td>
-              <td>${speedNumbersTwo || ""}</td>
-              <td>${speedNumbersPointsTwo}</td>
-              <td>${longNumbers || ""}</td>
-              <td>${longNumbersPoints}</td>
-              <td>${namesAndFaces || ""}</td>
-              <td>${namesAndFacesPoints}</td>
-              <td>${dates || ""}</td>
-              <td>${datesPoints}</td>
-              <td>${words || ""}</td>
-              <td>${wordsPoints}</td>
-              <td>${longCards || ""}</td>
-              <td>${longCardsPoints}</td>
-              <td>${spokenOne || ""}</td>
-              <td>${spokenPointsOne}</td>
-              <td>${spokenTwo || ""}</td>
-              <td>${spokenPointsTwo}</td>
-              <td>${spokenThree || ""}</td>
-              <td>${spokenPointsThree}</td>
-              <td>${speedCardsScoreOne || ""}</td>
-              <td>${speedCardsTimeOne || ""}</td>
-              <td>${speedCardsPointsOne()}</td>
-              <td>${speedCardsScoreTwo || ""}</td>
-              <td>${speedCardsTimeTwo || ""}</td>
-              <td>${speedCardsPointsTwo()}</td>
-              <td class="total">${overallPoints}</td>
-              ${
-                loggedIn
-                  ? `
-              <td>
-                <button type="button" class="delete-btn" data-id="${taskID}" data-name="${name}">
-                <i class="fas fa-trash"></i>
-                </button>
-              </td>
-              `
-                  : ""
-              }
-          </tr>
-`;
-      }
-    }
+    const data = competitorData.filter(
+      (el) => el.IAMID && el.IAMID.toString().includes(value)
+    );
+    showTasks(data);
   }
-  document.getElementById("tbody").innerHTML = table;
+
+  value.length === 0 && showTasks();
 }

@@ -629,3 +629,23 @@ button.delete-btn i {
 }
 
 /* End Tasks */
+
+.pages {
+  display: flex;
+  flex-wrap: wrap;
+  color: #fff;
+  gap: 3px;
+}
+
+.page {
+  background-color: var(--color-two);
+  width: 30px;
+  padding: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.page:hover,
+.active-page {
+  background-color: #4caf50;
+}
