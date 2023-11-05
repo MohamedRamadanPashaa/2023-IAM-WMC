@@ -45,7 +45,7 @@ let namesAndFacesStandards = 210;
 let wordsStandards = 312;
 let longCardsStandards = 1852;
 let longNumbersStandards = 3234;
-let imagesStandards = 446;
+let imagesStandards = 567;
 let datesStandards = 142;
 let spokenStandards = 47.3;
 
@@ -687,57 +687,76 @@ for (var i = 0; i < allField.length; i++) {
   });
 }
 
-function showImageTable() {
-  showTable("images", "imgTable", imagesStandards, "imgRank");
+function showImageTable(data) {
+  showTable("images", "imgTable", imagesStandards, "imgRank", data);
 }
 
-function showBinaryTable() {
-  showTable("binary", "binTable", binaryStandards, "binRank");
+function showBinaryTable(data) {
+  showTable("binary", "binTable", binaryStandards, "binRank", data);
 }
 
-function showNumber5TableOne() {
+function showNumber5TableOne(data) {
   showTable(
     "speedNumbersOne",
     "num5TableOne",
     speedNumbersStandards,
-    "num5RankOne"
+    "num5RankOne",
+    data
   );
 }
 
-function showNumber5TableTwo() {
+function showNumber5TableTwo(data) {
   showTable(
     "speedNumbersTwo",
     "num5TableTwo",
     speedNumbersStandards,
-    "num5RankTwo"
+    "num5RankTwo",
+    data
   );
 }
 
-function showWordsTable() {
-  showTable("words", "worTable", wordsStandards, "worRank");
+function showWordsTable(data) {
+  showTable("words", "worTable", wordsStandards, "worRank", data);
 }
 
-function showNumbers15Table() {
-  showTable("longNumbers", "num15Table", longNumbersStandards, "num15Rank");
+function showNumbers15Table(data) {
+  showTable(
+    "longNumbers",
+    "num15Table",
+    longNumbersStandards,
+    "num15Rank",
+    data
+  );
 }
 
-function showNamesTable() {
-  showTable("namesAndFaces", "namTable", namesAndFacesStandards, "namRank");
+function showNamesTable(data) {
+  showTable(
+    "namesAndFaces",
+    "namTable",
+    namesAndFacesStandards,
+    "namRank",
+    data
+  );
 }
 
-function showDatesTable() {
-  showTable("dates", "datTable", datesStandards, "datRank");
+function showDatesTable(data) {
+  showTable("dates", "datTable", datesStandards, "datRank", data);
 }
 
-function showCardsTable() {
-  showTable("longCards", "carTable", longCardsStandards, "carRank");
+function showCardsTable(data) {
+  showTable("longCards", "carTable", longCardsStandards, "carRank", data);
 }
 
-function showTable(test, tableId, standard, classRank) {
-  let table = "";
-  const data = competitorData.filter(
+function showTable(
+  test,
+  tableId,
+  standard,
+  classRank,
+  data = competitorData.filter(
     (el, i) => i >= (page - 1) * itemsPerPage - 1 && i < page * itemsPerPage - 1
-  );
+  )
+) {
+  let table = "";
   for (let i = 0; i < data.length; i++)
     table += `
         <tr>
@@ -755,23 +774,35 @@ function showTable(test, tableId, standard, classRank) {
   document.getElementById(tableId).innerHTML = table;
 }
 
-function showSNTableOne() {
-  showSNTable("spokenOne", "snTableOne", spokenStandards, "snRankOne");
+function showSNTableOne(data) {
+  showSNTable("spokenOne", "snTableOne", spokenStandards, "snRankOne", data);
 }
 
-function showSNTableTwo() {
-  showSNTable("spokenTwo", "snTableTwo", spokenStandards, "snRankTwo");
+function showSNTableTwo(data) {
+  showSNTable("spokenTwo", "snTableTwo", spokenStandards, "snRankTwo", data);
 }
 
-function showSNTableThree() {
-  showSNTable("spokenThree", "snTableThree", spokenStandards, "snRankThree");
-}
-
-function showSNTable(test, tableId, standard, snRank) {
-  let snTable = "";
-  const data = competitorData.filter(
-    (el, i) => i >= (page - 1) * itemsPerPage - 1 && i < page * itemsPerPage - 1
+function showSNTableThree(data) {
+  showSNTable(
+    "spokenThree",
+    "snTableThree",
+    spokenStandards,
+    "snRankThree",
+    data
   );
+}
+
+function showSNTable(
+  test,
+  tableId,
+  standard,
+  snRank,
+  data = competitorData.filter(
+    (el, i) => i >= (page - 1) * itemsPerPage - 1 && i < page * itemsPerPage - 1
+  )
+) {
+  let snTable = "";
+
   for (let i = 0; i < data.length; i++)
     snTable += `
     <tr>
@@ -789,11 +820,12 @@ function showSNTable(test, tableId, standard, snRank) {
   document.getElementById(tableId).innerHTML = snTable;
 }
 
-function showSCTableOne() {
-  let scTable = "";
-  const data = competitorData.filter(
+function showSCTableOne(
+  data = competitorData.filter(
     (el, i) => i >= (page - 1) * itemsPerPage - 1 && i < page * itemsPerPage - 1
-  );
+  )
+) {
+  let scTable = "";
   for (let i = 0; i < data.length; i++) {
     let speedCardsPoints = () => {
       if (data[i].speedCardsTimeOne < 300 && data[i].speedCardsScoreOne == 52) {
@@ -830,11 +862,13 @@ function showSCTableOne() {
   document.getElementById("scTableOne").innerHTML = scTable;
 }
 
-function showSCTableTwo() {
-  let scTable = "";
-  const data = competitorData.filter(
+function showSCTableTwo(
+  data = competitorData.filter(
     (el, i) => i >= (page - 1) * itemsPerPage - 1 && i < page * itemsPerPage - 1
-  );
+  )
+) {
+  let scTable = "";
+
   for (let i = 0; i < data.length; i++) {
     let speedCardsPoints = () => {
       if (data[i].speedCardsTimeTwo < 300 && data[i].speedCardsScoreTwo == 52) {
@@ -1012,13 +1046,15 @@ const ranking = (test) => {
   competitorData[0].rank = rank;
 
   for (let i = 1; i < competitorData.length; i++) {
-    if (competitorData[i][test] === competitorData[i - 1][test]) {
+    const valueOne = competitorData[i - 1][test] || 0;
+    const valueTwo = competitorData[i][test] || 0;
+    if (valueTwo === valueOne) {
       // If the score is the same as the previous element, share the same rank
       competitorData[i].rank = rank;
     } else {
       // If the score is different, increment the rank
       rank = i + 1;
-      competitorData[i].rank = rank;
+      competitorData[i].rank = i + 1;
     }
   }
 };
@@ -1356,10 +1392,11 @@ const rankingSc = (score, time) => {
   competitorData[0].rank = rank;
 
   for (let i = 1; i < competitorData.length; i++) {
-    if (
-      competitorData[i][score] === competitorData[i - 1][score] &&
-      competitorData[i][time] === competitorData[i - 1][time]
-    ) {
+    const scoreOne = competitorData[i - 1][score] || 0;
+    const scoreTwo = competitorData[i][score] || 0;
+    const timeOne = competitorData[i - 1][time] || 0;
+    const timeTwo = competitorData[i][time] || 0;
+    if (scoreOne === scoreTwo && timeOne === timeTwo) {
       // If the score is the same as the previous element, share the same rank
       competitorData[i].rank = rank;
     } else {
@@ -1445,18 +1482,32 @@ function getSearchMood(id) {
 }
 
 function searchCompetitors(value) {
+  let data = [];
   if (searchMood == "name") {
-    const data = competitorData.filter((el) =>
+    data = competitorData.filter((el) =>
       el.name.toLowerCase().includes(value.toLowerCase())
     );
-
-    showTasks(data);
   } else {
-    const data = competitorData.filter(
+    data = competitorData.filter(
       (el) => el.IAMID && el.IAMID.toString().includes(value)
     );
-    showTasks(data);
   }
 
+  console.log(data);
+  showTasks(data);
+  showImageTable(data);
+  showBinaryTable(data);
+  showNumber5TableOne(data);
+  showNumber5TableTwo(data);
+  showWordsTable(data);
+  showNumbers15Table(data);
+  showNamesTable(data);
+  showDatesTable(data);
+  showCardsTable(data);
+  showSNTableOne(data);
+  showSNTableTwo(data);
+  showSNTableThree(data);
+  showSCTableOne(data);
+  showSCTableTwo(data);
   value.length === 0 && showTasks();
 }

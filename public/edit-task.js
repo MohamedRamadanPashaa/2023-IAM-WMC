@@ -45,7 +45,7 @@ let namesAndFacesStandards = 210;
 let wordsStandards = 312;
 let longCardsStandards = 1852;
 let longNumbersStandards = 3234;
-let imagesStandards = 446;
+let imagesStandards = 567;
 let datesStandards = 142;
 let spokenStandards = 47.3;
 
