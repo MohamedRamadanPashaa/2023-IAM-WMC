@@ -5,17 +5,17 @@ const connectDB = require("./db/connect");
 require("dotenv").config();
 const notFound = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
-// const users = require("./routes/userRoutes");
+const users = require("./routes/userRoutes");
 
 // app.set("view engin", "ejs");
-// midleware
+// middleware
 app.use(express.static("./public"));
 // علشان اقدر احصل على الداتا في الصفحة
 app.use(express.json());
 
 // routes
 app.use("/api/v1/tasks", tasks);
-// app.use("/api/v1/users", users);
+app.use("/api/v1/users", users);
 
 // incorrect route
 app.use(notFound);

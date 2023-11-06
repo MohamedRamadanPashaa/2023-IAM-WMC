@@ -49,10 +49,7 @@ let imagesStandards = 567;
 let datesStandards = 142;
 let spokenStandards = 47.3;
 
-// login info
-let adminUserName = "IAMWMC2023";
-let adminPassword = "123789456IAM20wmc23";
-let loggedIn = false;
+let loggedIn = sessionStorage.getItem("login");
 let adminBtn = document.querySelector(".admin");
 let loginPage = document.querySelector(".login");
 let closeLoginBtn = document.querySelector(".close-login");
@@ -62,25 +59,33 @@ let loginBtn = document.querySelector(".login-btn");
 let errorLoginMsg = document.querySelector(".error-login");
 
 adminBtn.addEventListener("click", function () {
-  loginPage.style.opacity = "1";
-  loginPage.style.width = "100vw";
+  if (!loggedIn) {
+    loginPage.style.opacity = "1";
+    loginPage.style.width = "100vw";
+  } else {
+    sessionStorage.clear();
+    location.reload();
+  }
 });
+
+if (loggedIn) {
+  adminBtn.textContent = "logout";
+}
 
 closeLoginBtn.addEventListener("click", function () {
   loginPage.style.width = "0";
   loginPage.style.opacity = "0";
 });
 
-loginBtn.addEventListener("click", function (e) {
+loginBtn.addEventListener("click", async (e) => {
   e.preventDefault();
-  if (
-    userNameInput.value == adminUserName &&
-    userPasswordInput.value == adminPassword
-  ) {
-    console.log("logged in");
-    sessionStorage.setItem("userName", userNameInput.value);
-    sessionStorage.setItem("password", userPasswordInput.value);
-    loggedIn == true;
+  try {
+    const { data } = await axios.post("/api/v1/users/login-admin", {
+      userName: userNameInput.value,
+      password: userPasswordInput.value,
+    });
+
+    sessionStorage.setItem("login", true);
     errorLoginMsg.textContent = "You Logged In Successfully";
     errorLoginMsg.style.color = "#4caf50";
 
@@ -91,19 +96,13 @@ loginBtn.addEventListener("click", function (e) {
     setTimeout(() => {
       location.reload();
     }, 2000);
-  } else {
+  } catch (error) {
+    console.log(error);
     console.log("you are not logged in");
     errorLoginMsg.textContent = "Error In Name or Password";
     errorLoginMsg.style.color = "#e91e45";
   }
 });
-
-if (
-  sessionStorage.userName == adminUserName &&
-  sessionStorage.password == adminPassword
-) {
-  loggedIn = true;
-}
 
 if (loggedIn) {
   console.log("Logged In");
@@ -111,7 +110,7 @@ if (loggedIn) {
   console.log("Not Logged In");
   document.getElementById("competitor-info-name").remove();
   document.querySelector(".addCompetitor").remove();
-  document.querySelector(".searchBlock").remove();
+  // document.querySelector(".searchBlock").remove();
   document.querySelector(".editcol").remove();
   document.querySelector(".deletecol").remove();
 }
@@ -192,10 +191,12 @@ snScoreOne.onkeyup = () => {
   snPointsOne.value = calcSpokenPoints(snScoreOne.value);
   getTotalPoints();
 };
+
 snScoreTwo.onkeyup = () => {
   snPointsTwo.value = calcSpokenPoints(snScoreTwo.value);
   getTotalPoints();
 };
+
 snScoreThree.onkeyup = () => {
   snPointsThree.value = calcSpokenPoints(snScoreThree.value);
   getTotalPoints();
@@ -595,6 +596,7 @@ function displayNumbers5TableTwo() {
   page = 1;
   document.getElementById(`page-${1}`).click();
 }
+
 function displayWordsTable() {
   displayOneTable("wor-table", "wor-btn");
   sortWorTable();
